@@ -2,29 +2,37 @@
 '''
 
 from dataclasses import dataclass, asdict
-from typing import Union
+from typing import Union, Literal
 import json
+
+
+@dataclass
+class Account:
+    username: str
+    password: str
+    created: str
 
 
 @dataclass
 class Demographic:
     first_name: str
-    middle_name: str
+    middle_name: str=None
     surname: str
     date_of_birth: str
     gender: str
     home_address: str
     phone: str | list[str]
-    email: str
-    race: str
+    email: str=None
+    race: Literal['Black', 'White', 'Colored', 'Indian', 'Asian']
     languages: list[str]
 
 
 @dataclass
 class Family:
-    parent_guardian_names: list[str]
-    parent_guardian_contact_info: list[str]
-    home_area: str
+    name: list[str]
+    contacts: list[str]=None
+    address: str
+    area: str
 
 
 @dataclass
@@ -57,4 +65,5 @@ class Student(JSONTrait):
     family: Family
     education: EducationalBackground
     citizenship: CitizenshipResidency
-    interests: list[str]        
+    interests: list[str]
+    _type: str='users.Student'
