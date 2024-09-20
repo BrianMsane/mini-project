@@ -4,13 +4,15 @@
 from dataclasses import dataclass, asdict
 from typing import Union, Literal
 import json
+import datetime
 
 
 @dataclass
 class Account:
     username: str
+    email: str
     password: str
-    created: str
+    created: str=datetime.date.today().strftime('Y-m-d')
 
 
 @dataclass
