@@ -12,7 +12,7 @@ class Account:
     username: str
     email: str
     password: str
-    created: str=datetime.date.today().strftime('Y-m-d')
+    created: str=datetime.date.today().strftime('%Y-%m-%d')
 
 
 @dataclass

@@ -14,14 +14,16 @@ Mcanco
 23 - 25 Form for information
 
 
+
 Me 
 ====
 19 - Adding Utility function
 20 - Proposed Database
-21 - Normalization
+21 - Normalization and schema design (enforced as modereates)
 23 - Link code and files for processing information
 24 - Add Server and adjust it to work with the SignUp page [by storing data in mongodb in the desired structure]
 
 My idea around the search in the landing place is that I want the users to be able to write any query which is 
 related to our platform for instance, I am a student and I want to pursue Information Technology in varsity
-what is the desired procedure that I need to follow. we're going to use an LLM for it to be able to 
+what is the desired procedure that I need to follow. we're going to use an LLM for it to be able to respond to the user query
+so that 
