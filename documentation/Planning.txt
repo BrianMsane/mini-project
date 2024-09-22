@@ -6,13 +6,15 @@ Nkuntju
 19 - 21 Signin Page
 22 Signup Page
 23 -24 Home Page Structuring and formating 
+25 - 26 Contact Us Page
 
 
 Mcanco
 ======
 19 - 22 Home Page
 23 - 25 Form for information
-
+26 - 27 About Us Page
+27 - 28 Add Event Calendar
 
 
 Me 
@@ -22,6 +24,7 @@ Me
 21 - Normalization and schema design (enforced as modereates)
 23 - Link code and files for processing information
 24 - Add Server and adjust it to work with the SignUp page [by storing data in mongodb in the desired structure]
+25 - Make sure that all the links and methods [POST, GET, PUT, PATCH] are made the right way in the server
 
 My idea around the search in the landing place is that I want the users to be able to write any query which is 
 related to our platform for instance, I am a student and I want to pursue Information Technology in varsity
