@@ -20,4 +20,4 @@ Once we have the information, we need we need to:<br>
     <li> for now, this recommendation is what we need to focus on<br>
 
 <h3>Comments and Considerations</h3>
-Further advancement of the project are going to be seen as we progress so for now, this is the scope
+Further advancement of the project are going to be seen as we progress so for now, this is the scope!
