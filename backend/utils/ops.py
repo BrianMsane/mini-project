@@ -2,7 +2,7 @@
 '''
 
 
-def grade_to_point(grade):
+def grade_to_point(grade: str):
     '''Match the grade with the equivalent point value
     '''
     if grade == 'A*':
@@ -25,11 +25,17 @@ def grade_to_point(grade):
         return 0
 
 
+def sort_credits(data: dict):
+    '''Sort the grades to find the best 6 credits
+    '''
+    
+
+
 def cal_points(data: dict) -> int:
     '''Calculate the total number of points the user has
     '''
     points: int = 0
-    results = sorted(data['symbols']['grade'], key=lambda x: x['grade'])
+    results = data['symbols']['grade']
     for index, grade in enumerate(results):
         if index <= 5:
             point = grade_to_point(grade)
