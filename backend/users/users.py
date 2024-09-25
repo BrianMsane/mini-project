@@ -2,7 +2,7 @@
 '''
 
 from dataclasses import dataclass, asdict
-from typing import Union, Literal
+from typing import Literal
 import json
 import datetime
 
@@ -10,9 +10,10 @@ import datetime
 @dataclass
 class Account:
     username: str
+    fullname: str
     email: str
     password: str
-    created: str=datetime.date.today().strftime('Y-m-d')
+    created: str=datetime.date.today().strftime('%Y-%m-%d')
 
 
 @dataclass
@@ -22,16 +23,15 @@ class Demographic:
     surname: str
     date_of_birth: str
     gender: str
-    home_address: str
+    address: str
     phone: str | list[str]
-    email: str=None
     race: Literal['Black', 'White', 'Colored', 'Indian', 'Asian']
     languages: list[str]
 
 
 @dataclass
 class Family:
-    name: list[str]
+    parents: list[str]
     contacts: list[str]=None
     address: str
     area: str
@@ -39,10 +39,9 @@ class Family:
 
 @dataclass
 class EducationalBackground:
-    high_school_name: str
-    high_school_address: str
-    high_school_transcript: str
-    standardized_test_scores: dict[str, Union[int, str]]
+    name: str
+    addresss: str
+    telephone: str
 
 
 @dataclass

@@ -1,3 +1,6 @@
+//form validation for signup page, please make it robust especially the passord
+
+
 function validation(){
     if(document.Formfill.Username.value==""){
         document.getElementById("result").innerHTML="Enter Username*";
@@ -27,7 +30,4 @@ function validation(){
         document.getElementById("result").innerHTML="Password must be 6-digits";
         return false;
      }
-
-
-
 }
