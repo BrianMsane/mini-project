@@ -10,4 +10,4 @@ You can refer to tools.md to see the list of available tools that can be used in
 - Node.js -as a framework for the backend (defining a server)
 - Python -handling the logic for the application in the backend
 - MongoDB -as our database, stores data in collections and uses the NOSQL, meaning not only structured query language
-- GraphQL to listen to instructions and server the user data accordingly
+- GraphQL -to listen to instructions and server the user data accordingly
