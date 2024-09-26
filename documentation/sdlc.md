@@ -1,0 +1,1 @@
+describe the project in as far as SDLC is concerned
