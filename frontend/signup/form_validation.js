@@ -1,3 +1,6 @@
+//form validation for signup page, please make it robust especially the passord
+
+
 function validation(){
     if(document.Formfill.Username.value==""){
         document.getElementById("result").innerHTML="Enter Username*";
@@ -33,3 +36,5 @@ function validation(){
      }
 }
 var popup=document.getElementById('popup');
+
+
