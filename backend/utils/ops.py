@@ -3,7 +3,7 @@
 
 
 def grade_to_point(grade: str):
-    '''Match the grade with the equivalent point value
+    '''Match the grade with the equivalent point value(EGCSE)
     '''
     if grade == 'A*':
         return 8
@@ -46,7 +46,7 @@ def cal_points(data: dict) -> int:
 def rel_programs(
     data: dict,
     points: int,
-    streams: list[str]
+    streams: list[str]=None
 ) -> list[dict]:
     '''Get all the courses that the user qualifies for
     '''

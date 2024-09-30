@@ -7,3 +7,29 @@
 5. return to the user the subjects they qualify for through the website(dynamic page)
 '''
 
+
+from db.mongo import read
+from utils.ops import cal_points, rel_programs
+
+
+def main():
+    '''Running the entire application
+    '''
+    user_id: str=''
+    user_data: dict = read(query={'user_id':user_id})
+    user_points = cal_points(data=user_data)
+    qualifyingPrograms = rel_programs(points=user_points, data=user_data, streams=None)
+    details: list = []
+    for program in qualifyingPrograms:
+        details.append(
+            {
+                'name': program['name'],
+                'institution': program['institution'],
+                'duration': program['duration']
+            }
+        )
+    return qualifyingPrograms
+
+
+if __name__ == '__main__':
+    main()
