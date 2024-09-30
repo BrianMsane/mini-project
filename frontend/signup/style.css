@@ -27,7 +27,7 @@ body{
     height: 550px;
     border: 2px solid rgba(255,255,2550,2550.5);
     border-radius: 20px;
-    backdrop-filter: blur(15px);
+    backdrop-filter: blur(7px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -54,7 +54,7 @@ body{
     outline: none;
     padding: 0 20px 0 5px;
     color: #fff;
-    font-size: 16px
+    font-size: 16px;
 }
 .i{
     position: absolute;

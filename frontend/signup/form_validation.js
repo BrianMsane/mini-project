@@ -31,10 +31,13 @@ function validation(){
       return false;
      }
      else if(document.Formfill.CPassword.value == document.Formfill.CPassword.value){
-      popup.classList.add(".open-slide")
+      popup.classList.add("open-slide")
       return false;
      }
 }
 var popup=document.getElementById('popup');
+function CloseSlide(){
+   popup.classList.remove('open-slide')
+}
 
 
