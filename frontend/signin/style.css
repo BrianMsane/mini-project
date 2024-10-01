@@ -1,10 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
  
  * {
-     margin: 0;
+    margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
+    font-family: "poppins", sans-serif;
   }
 
  body {
@@ -12,7 +12,7 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: skyblue;
+    background: url(../images/sas1.jpg) no-repeat;
     background-size: cover;
     background-position: center;
  }
@@ -21,7 +21,7 @@
     width: 420px;
     background: transparent;
     border: 2px solid rgba(255, 255, 255, .2);
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(100px);
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
     color: #fff;
     border-radius: 10px;
@@ -29,7 +29,7 @@
  }
 
  .wrapper h1 {
-    font-size: 36px;
+    font-size: 32px;
     text-align: center;
  }
 
@@ -114,6 +114,3 @@
 .register-link p a:hover {
     text-decoration: underline;
 }
-
-
- 
