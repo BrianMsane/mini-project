@@ -31,8 +31,22 @@ singupSchema = new mongoose.Schema({
 const SignUp = mongoose.model('data', singupSchema);
 
 
+// define login schema
+loginSchema = new mongoose.Schema({
+    username: String,
+    password: String,
+});
+const loginIn = mongoose.model('data', singupSchema);
+
+
+// serving the application
+app.get("/", (req, res) =>{
+    res.sendFile(path.join(__dirname, './signup/index.html'));
+});
+
+
 // store data in db
-app.post('/post', async(req, res)=>{
+app.post('/signup', async(req, res)=>{
     const {username, email, password, conf_pass} = req.body;
     const user = new SignUp({
         username,
@@ -47,8 +61,30 @@ app.post('/post', async(req, res)=>{
 })
 
 
+// store data in db
+app.post('/login', async(req, res)=>{
+    const {username, password} = req.body;
+    const user = new loginIn({
+        username,
+        password,
+    });
+    await user.save();
+    console.log(user);
+    // res.send("Form Submitted sucessfully!");
+    res.sendFile(path.join(__dirname, './home/index.html')); //home page after login
+})
+
 // serving the application
-app.get("/", (req, res) =>{
-    res.sendFile(path.join(__dirname, './signup/index.html'));
+app.get("/about-us", (req, res) =>{
+    res.sendFile(path.join(__dirname, './about-us/index.html'));
 });
 
+// serving the application
+app.get("/contact-us", (req, res) =>{
+    res.sendFile(path.join(__dirname, './contact-us/index.html'));
+});
+
+// serving the application
+app.get("/error", (req, res) =>{
+    res.sendFile(path.join(__dirname, './error/index.html'));
+});
