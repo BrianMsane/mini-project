@@ -39,6 +39,14 @@ loginSchema = new mongoose.Schema({
 const loginIn = mongoose.model('data', singupSchema);
 
 
+// define contact-us schema
+contactUsSchema = new mongoose.Schema({
+    fullName: String,
+    email: String,
+    text: String
+});
+const contactUs= mongoose.model('data', contactUsSchema);
+
 // serving the application
 app.get("/", (req, res) =>{
     res.sendFile(path.join(__dirname, './signup/index.html'));
@@ -56,7 +64,6 @@ app.post('/signup', async(req, res)=>{
     });
     await user.save();
     console.log(user);
-    // res.send("Form Submitted sucessfully!");
     res.sendFile(path.join(__dirname, './home/index.html')); //home page after login
 })
 
@@ -70,21 +77,29 @@ app.post('/login', async(req, res)=>{
     });
     await user.save();
     console.log(user);
-    // res.send("Form Submitted sucessfully!");
-    res.sendFile(path.join(__dirname, './home/index.html')); //home page after login
+    res.sendFile(path.join(__dirname, './home/index.html'));
 })
+
 
 // serving the application
 app.get("/about-us", (req, res) =>{
     res.sendFile(path.join(__dirname, './about-us/index.html'));
 });
 
-// serving the application
+
+// serving the contact-us page
 app.get("/contact-us", (req, res) =>{
+    const {fullName, email, text} = req.body;
+    const user = new contactUs({
+        fullName,
+        email,
+        text
+    });
     res.sendFile(path.join(__dirname, './contact-us/index.html'));
 });
 
-// serving the application
-app.get("/error", (req, res) =>{
+
+// serving the error404 page
+app.get("/error404", (req, res) =>{
     res.sendFile(path.join(__dirname, './error/index.html'));
 });
