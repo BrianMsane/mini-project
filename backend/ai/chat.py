@@ -3,13 +3,14 @@
 
 import yaml
 import autogen
+from agents import Agent
 
 
 with open("model_config.yaml", "r") as file:
     model_config = yaml.safe_load(file)
 
 
-class FormCollector:
+class FormCollector(Agent):
     def __init__(
         self,
         system_message: str=model_config['form_data_collector']['system_prompt'],
