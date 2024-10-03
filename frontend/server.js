@@ -36,7 +36,7 @@ loginSchema = new mongoose.Schema({
     username: String,
     password: String,
 });
-const loginIn = mongoose.model('data', singupSchema);
+const loginIn = mongoose.model('datas', singupSchema);
 
 
 // define contact-us schema
@@ -45,7 +45,7 @@ contactUsSchema = new mongoose.Schema({
     email: String,
     text: String
 });
-const contactUs= mongoose.model('data', contactUsSchema);
+const contactUs= mongoose.model('datad', contactUsSchema);
 
 // serving the application
 app.get("/", (req, res) =>{
@@ -63,9 +63,8 @@ app.post('/signup', async(req, res)=>{
         conf_pass
     });
     await user.save();
-    console.log(user);
-    res.sendFile(path.join(__dirname, './home/index.html')); //home page after login
-})
+    res.redirect(`/login?username=${username}&password=${password}`)
+});
 
 
 // store data in db
@@ -76,12 +75,11 @@ app.post('/login', async(req, res)=>{
         password,
     });
     await user.save();
-    console.log(user);
     res.sendFile(path.join(__dirname, './home/index.html'));
-})
+});
 
 
-// serving the application
+// serving the about-us
 app.get("/about-us", (req, res) =>{
     res.sendFile(path.join(__dirname, './about-us/index.html'));
 });
