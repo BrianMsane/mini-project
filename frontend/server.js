@@ -2,6 +2,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const path =require('path');
+const axios = require('axios');
 const port = 3019;
 
 
@@ -85,15 +86,26 @@ app.get("/about-us", (req, res) =>{
 });
 
 
-// serving the contact-us page
-app.get("/contact-us", (req, res) =>{
-    const {fullName, email, text} = req.body;
-    const user = new contactUs({
+app.get("/contact-us", async (req, res) => {
+    // Extract data from the frontend request and make backend payload
+    const { fullName, email, text } = req.body;
+    const userDetails = {
         fullName,
         email,
         text
-    });
-    res.sendFile(path.join(__dirname, './contact-us/index.html'));
+    };
+
+    try {
+        // Send the request to the backend server
+        const response = await axios.post('http://localhost:3017/contact-us', userDetails);
+        if (response.status === 200) {
+            console.log("Message successfully sent to the backend server!");
+        }
+        res.sendFile(path.join(__dirname, './contact-us/index.html'));
+    } catch (error) {
+        console.error("Error sending data to backend:", error);
+        res.status(500).send("Failed to process the request.");
+    }
 });
 
 
