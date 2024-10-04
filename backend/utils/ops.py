@@ -1,9 +1,10 @@
 '''Store Utility functions for the backend of the project
 '''
 
+from db.mongo import read
 
 def grade_to_point(grade: str):
-    '''Match the grade with the equivalent point value
+    '''Match the grade with the equivalent point value(EGCSE)
     '''
     if grade == 'A*':
         return 8
@@ -46,7 +47,7 @@ def cal_points(data: dict) -> int:
 def rel_programs(
     data: dict,
     points: int,
-    streams: list[str]
+    streams: list[str]=None
 ) -> list[dict]:
     '''Get all the courses that the user qualifies for
     '''
@@ -59,3 +60,22 @@ def rel_programs(
         if course['stream'] in streams:
             finalQualifyFor.append(course)
     return finalQualifyFor
+
+
+def main():
+    '''Running the entire application
+    '''
+    user_id: str=''
+    user_data: dict = read(query={'user_id':user_id})
+    user_points = cal_points(data=user_data)
+    qualifyingPrograms = rel_programs(points=user_points, data=user_data, streams=None)
+    details: list = []
+    for program in qualifyingPrograms:
+        details.append(
+            {
+                'name': program['name'],
+                'institution': program['institution'],
+                'duration': program['duration']
+            }
+        )
+    return qualifyingPrograms
