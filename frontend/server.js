@@ -3,12 +3,15 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path =require('path');
 const axios = require('axios');
-const port = 3019;
+const multer = require('multer');
+const fs = require('fs');
+
+const PORT = 3019;
 
 
 // application
 const app = express();
-app.listen(port, ()=>{console.log('Server started successfully!');});
+app.listen(PORT, ()=>{console.log('Server started successfully!');});
 app.use(express.static(__dirname));
 app.use(express.urlencoded({extended:true}));
 
@@ -21,7 +24,7 @@ db.once('open', ()=>{
     console.log('Mongodb connection successful!');
 });
 
-
+// SCHEMAS
 // define signup schema
 singupSchema = new mongoose.Schema({
     username: String,
@@ -47,6 +50,9 @@ contactUsSchema = new mongoose.Schema({
     text: String
 });
 const contactUs= mongoose.model('datad', contactUsSchema);
+
+
+
 
 // serving the application
 app.get("/", (req, res) =>{
@@ -86,7 +92,7 @@ app.get("/about-us", (req, res) =>{
 });
 
 
-app.get("/contact-us", async (req, res) => {
+app.post("/contact-us", async (req, res) => {
     // Extract data from the frontend request and make backend payload
     const { fullName, email, text } = req.body;
     const userDetails = {
@@ -111,5 +117,11 @@ app.get("/contact-us", async (req, res) => {
 
 // serving the error404 page
 app.get("/error404", (req, res) =>{
+    res.sendFile(path.join(__dirname, './error/index.html'));
+});
+
+
+// serving the error404 page
+app.post("/upload", (req, res) =>{
     res.sendFile(path.join(__dirname, './error/index.html'));
 });

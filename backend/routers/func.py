@@ -8,10 +8,14 @@ import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from support.emails import send_email
+from api_scripts import router
 
 
-app = FastAPI()
-app.include_router(prefix="/app")
+app = FastAPI(
+    title="Document OCR and Question Answering!",
+    description="This is an API that deals with Document Summarization"
+)
+app.include_router(router=router, prefix="/app")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
