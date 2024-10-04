@@ -1,3 +1,4 @@
+
 // Serving the front-end appliation
 const express = require('express');
 const mongoose = require('mongoose');
@@ -7,11 +8,10 @@ const multer = require('multer');
 const upload = multer({ dest: 'temp/' });
 const fs = require('fs');
 
-const PORT = 3019;
-
 
 // application
 const app = express();
+const PORT = 3019;
 app.listen(PORT, ()=>{console.log('Server started successfully!');});
 app.use(express.static(__dirname));
 app.use(express.urlencoded({extended:true}));
@@ -51,7 +51,6 @@ contactUsSchema = new mongoose.Schema({
     text: String
 });
 const contactUs= mongoose.model('datad', contactUsSchema);
-
 
 
 
@@ -150,4 +149,12 @@ app.post('/upload', upload.single('document'), async (req, res) => {
         console.error('File upload failed:', error);
         res.status(500).send('Failed to upload the document.');
     }
+});
+
+app.get('/fill-form', checkAuthentication, (req, res) => {
+    res.sendFile(path.join(__dirname, './form/index.html'));
+});
+
+app.get('/get-recommendations', checkAuthentication, (req, res) => {
+    res.sendFile(path.join(__dirname, './chat/index.html'));
 });
