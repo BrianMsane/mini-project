@@ -21,21 +21,5 @@ app.add_middleware(
 )
 
 
-@app.post('/contact-us')
-def email_support(
-    name: str,
-    sender_email: str,
-    message: str
-):
-    '''API Endpoint for handling contact-us page and visitors queries [powered by AI]
-    '''
-    send_email(
-        name=name,
-        sender_email=sender_email,
-        receiver_email='msanebrianboss@gmail.com',
-        message=message
-    )
-
-
 if __name__ == '__main__':
     uvicorn.run(app, port=3017, host='0.0.0.0')
