@@ -26,10 +26,13 @@ async def email_support(
 
 @router.post('/upload_document', tags=['Symbols'])
 async def upload(
-    file: UploadFile = File(description='File')
+    file: UploadFile = File(description='File'),
+    upload_dir: str="uploaded"
 ):
-    upload_dir = "uploaded"
     os.makedirs(upload_dir, exist_ok=True)
+    # ext = file.filename.split('.')[-1]
+    # file.filename = f'user_id_.{ext}'
+
     file_location = os.path.join(upload_dir, file.filename)
     with open(file_location, "wb") as f:
         f.write(file.file.read())

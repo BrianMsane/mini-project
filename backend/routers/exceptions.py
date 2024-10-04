@@ -1,7 +1,6 @@
 '''Exceptions
 '''
 
-
 class ApiException(Exception):
     """Generic API Exception
     """

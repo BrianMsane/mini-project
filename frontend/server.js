@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const path =require('path');
 const axios = require('axios');
 const multer = require('multer');
+const upload = multer({ dest: 'temp/' });
 const fs = require('fs');
 
 const PORT = 3019;
@@ -121,7 +122,32 @@ app.get("/error404", (req, res) =>{
 });
 
 
-// serving the error404 page
-app.post("/upload", (req, res) =>{
-    res.sendFile(path.join(__dirname, './error/index.html'));
+// Handle file uploads and forward to FastAPI backend
+app.post('/upload', upload.single('document'), async (req, res) => {
+    const {file } = req;
+
+    if (!file) {
+        return res.sendFile(path.join(__dirname, './public/error404.html'));
+    }
+
+    try {
+        // Prepare file data for backend
+        const fileStream = fs.createReadStream(file.path);
+        const formData = {
+            file: fileStream,
+        };
+
+        // Use axios to send the file to FastAPI backend
+        const response = await axios.post('http://localhost:3017/upload_document', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        });
+        fs.unlinkSync(file.path);
+
+        res.send(`File uploaded successfully! Backend response: ${response.data}`); // serve the next step
+    } catch (error) {
+        console.error('File upload failed:', error);
+        res.status(500).send('Failed to upload the document.');
+    }
 });
