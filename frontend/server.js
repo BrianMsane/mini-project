@@ -99,7 +99,7 @@ app.get("/contact-us", async (req, res) => {
         // Send the request to the backend server
         const response = await axios.post('http://localhost:3017/contact-us', userDetails);
         if (response.status === 200) {
-            console.log("Message successfully sent to the backend server!");
+            console.log("Message successfully sent to the backend server!"); //pop-up to tell the user to check thier emails
         }
         res.sendFile(path.join(__dirname, './contact-us/index.html'));
     } catch (error) {
