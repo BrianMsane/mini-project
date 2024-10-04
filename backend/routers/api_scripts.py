@@ -1,3 +1,5 @@
+'''Define the FASTAPI endpoints for this application
+'''
 
 from fastapi import APIRouter, UploadFile, File
 from support.emails import send_email
@@ -6,6 +8,13 @@ import dotenv
 
 dotenv.load_dotenv()
 router = APIRouter()
+
+
+@router.get('/')
+async def root():
+    return {
+        'message': 'This is the root endpoint'
+    }
 
 
 @router.post('/contact-us', tags=['Email-Handling'])
