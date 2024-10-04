@@ -1,5 +1,8 @@
 pymongo
+pyautogen
 python-dotenv
 easyocr
 pymupdf
 openai
+uvicorn
+fastapi

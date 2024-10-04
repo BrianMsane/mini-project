@@ -18,3 +18,23 @@ class Agent(ABC):
 
     def change_model(self, model: str):
         self.model = model
+        
+
+class EmailAssistant(Agent):
+    
+    def __init__(
+        self,
+        system_messge: str,
+        model: str
+    ) -> None:
+        super.__init__(system_messge=system_messge, model=model)
+
+
+class Recommender(Agent):
+
+    def __init__(
+        self,
+        system_messge: str,
+        model: str
+    ) -> None:
+        super.__init__(system_messge=system_messge, model=model)
