@@ -1,7 +1,6 @@
 
 <h1>Our Project is going to require these tools for now</h1>
 
-You can refer to tools.md to see the list of available tools that can be used in building this project but we are only going to use the following technologies in the development of this project:
 
 - HTML -defining the structure of our web application
 - CSS - stlying the web application
@@ -11,3 +10,6 @@ You can refer to tools.md to see the list of available tools that can be used in
 - Python -handling the logic for the application in the backend
 - MongoDB -as our database, stores data in collections and uses the NOSQL, meaning not only structured query language
 - GraphQL -to listen to instructions and server the user data accordingly
+- LocalServer -for the purposes of this mini-project, we are going to use our PC to host the Frontend and backend. but moving on, we will utilize services like Microsoft Azure, AWS, Jenkins, and many more
+- CI/CD -because we practice agile methodology, SCRUM, we make use of continous integration and continuous deployment through the utlimate use of github actions. With actions, we make build and release pipelines for our backend
+- Collaboration -we have three contributors in our group so we use Git and Github for seamless development and collaboration.
