@@ -1,142 +1,293 @@
-*{
+/* General Styles */
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "poppins", sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
-.banner{
-    width: 100%;
-    height: 100vh;
-    background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url(sas1.jpg);
-    background-size: cover;
-    background-position: center;
-    min-height: 100vh;
-    background-size: cover;
-}
-
-.navbar{
+/* Container */
+.container {
     width: 85%;
+    max-width: 1200px;
     margin: auto;
-    padding: 35px 0;
+}
+
+/* Navigation Bar */
+.navbar {
+    background-color: #fff;
+    padding: 20px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 999;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.navbar .container {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.logo{
-  width: 120px;
-  cursor: pointer;
+.logo img {
+    width: 150px;
 }
 
-.navbar ul li{
-    list-style: none;
-    display: inline-block;
-    margin: 0 20px;
-    position: relative;
-}
-
-.navbar ul li a{
-    text-decoration: none;
-    color: #fff;
-}
-
-.navbar ul li::after{
-    content: '';
-    height: 3px;
-    width: 0;
-    background: #009688;
-    position: absolute;
-    left: 0;
-    bottom: -10px;
-    transition: 0.5s;
-}
-
-.navbar ul li:hover::after{
-    width: 100%;
-}
-
-.content{
-    width: 100%;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    text-align:  center;
-    color: #fff;
-}
-
-.content h1{
-    font: size 70px;
-    margin-top: 80px;
-}
-
-.content p{
-    margin: 20px auto;
-    font-weight: 100;
-    line-height: 25px;
-}
-
-button{
-    width: 200px;
-    padding: 15px 0;
-    text-align: center;
-    margin: 20px 10px;
-    border-radius: 25px;
-    font-weight: bold;
-    border: 2px solid #009688;
-    background: transparent;
-    color: #fff;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-}
-
-span{
-    background: #009688;
-    height: 100%;
-    width: 0;
-    border-radius: 25px;
-    position:absolute;
-    left: 0;
-    bottom: 0;
-    z-index: -1;
-    transition: 0.5s;
-}
-
-.menu{
-    width:65%;
+.nav-menu {
     display: flex;
-    justify-content: right;
     list-style: none;
 }
 
-button:hover span{
-    width: 100%;
+.nav-menu li {
+    margin-left: 30px;
 }
 
-button:hover{
-    border: none;
+.nav-menu a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s;
 }
 
-/* footer Section of the HOME page */
-.footer {
+.nav-menu a:hover {
+    color: #009688;
+}
+
+.btn-login {
+    padding: 8px 20px;
+    background-color: #009688;
+    color: #fff !important;
+    border-radius: 5px;
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.hamburger span {
+    height: 3px;
+    width: 25px;
+    background: #333;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+
+/* Hero Section */
+.hero {
+    background-image: url('sas1.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    padding-top: 100px;
+    color: #fff;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.hero .container {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 150px 20px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.btn-primary {
+    padding: 15px 30px;
+    background-color: #009688;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #00796b;
+}
+
+/* Features Section */
+.features {
+    padding: 80px 0;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+.features h2 {
+    font-size: 36px;
+    margin-bottom: 50px;
+    color: #333;
+}
+
+.feature-cards {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.feature-card {
     background-color: #fff;
-    padding: 30px 0;
+    width: 48%;
+    margin-bottom: 30px;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.feature-card h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #009688;
+}
+
+.feature-card p {
+    font-size: 16px;
+    color: #666;
+}
+
+/* Process Section */
+.process {
+    padding: 80px 0;
+    background-color: #fff;
+    text-align: center;
+}
+
+.process h2 {
+    font-size: 36px;
+    margin-bottom: 50px;
+    color: #333;
+}
+
+.process-steps {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.process-step {
+    width: 22%;
+    background-color: #f9f9f9;
+    padding: 30px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.step-number {
+    width: 50px;
+    height: 50px;
+    background-color: #009688;
+    color: #fff;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.process-step h3 {
+    font-size: 22px;
+    margin-bottom: 10px;
+    color: #009688;
+}
+
+.process-step p {
+    font-size: 16px;
+    color: #666;
+}
+
+/* FAQ Section */
+.faq {
+    padding: 80px 0;
+}
+
+.faq h2 {
+    font-size: 36px;
+    margin-bottom: 50px;
+    color: #333;
+}
+
+.faq-items {
+    max-width: 800px;
+    margin: auto;
+}
+
+.faq-item {
+    margin-bottom: 15px;
+    border-bottom: 1px solid #e5e5e5;
+    cursor: pointer;
+}
+
+.faq-question {
+    padding: 15px;
+    background-color: #f9f9f9;
+}
+
+.faq-question h3 {
+    font-size: 22px;
+    color: #009688;
+    margin: 0;
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    background-color: #fff;
+    padding: 0 15px;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.faq-item.active .faq-answer {
+    max-height: 200px;
+    padding: 15px;
+}
+
+.faq-answer p {
+    font-size: 16px;
+    color: #666;
+}
+
+/* Footer */
+.footer {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    padding: 40px 0;
 }
 
 .footer-content {
     display: flex;
-    justify-content: space-around;
-    align-items: flex-start;
     flex-wrap: wrap;
     max-width: 1100px;
     margin: auto;
+    justify-content: space-between;
 }
 
 .footer-section {
     flex: 1;
-    padding: 20px;
-    min-width: 200px;
+    min-width: 250px;
+    margin-bottom: 20px;
 }
 
 .footer-section h2 {
@@ -144,12 +295,14 @@ button:hover{
     margin-bottom: 15px;
 }
 
-.footer-section p {
+.footer-section p,
+.footer-section ul li {
     font-size: 14px;
+    color: #bdc3c7;
 }
 
 .footer-section ul {
-    list-style-type: none;
+    list-style: none;
     padding: 0;
 }
 
@@ -158,115 +311,113 @@ button:hover{
 }
 
 .footer-section ul li a {
-    color: black;
+    color: #bdc3c7;
     text-decoration: none;
-    font-size: 14px;
+    transition: color 0.3s ease;
 }
 
 .footer-section ul li a:hover {
-    text-decoration: underline;
+    color: #3498db;
+}
+
+.social-icons a {
+    display: inline-block;
+    margin-right: 10px;
+    color: #ecf0f1;
+    font-size: 20px;
+}
+
+.social-icons a:hover {
+    color: #3498db;
 }
 
 .footer-bottom {
     text-align: center;
-    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #34495e;
+    color: #7f8c8d;
     font-size: 14px;
-}
-
-.social-icons {
-    margin-top: 20px;
-}
-
-.social-icons a {
-    margin-right: 10px;
-    display: inline-block;
-}
-
-.social-icons img {
-    width: 25px;
-    height: 25px;
 }
 
 .right-align {
     display: flex;
-    margin-left: auto;
-}
-
-
-/* features and frequently asked questions combined */
-.features-faq {
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-    padding: 50px;
-}
-
-/* Features Section */
-.features {
-    text-align: center;
-    margin-bottom: 50px;
-}
-
-.features h2 {
-    font-size: 24px;
-    color: #3B3486;
-    margin-bottom: 20px;
-}
-
-.feature-cards {
-    display: flex;
-    justify-content: space-around;
     flex-wrap: wrap;
 }
 
-.feature-card {
-    width: 22%;
-    background-color: #F7F9FB;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
-    margin: 10px;
-    text-align: left;
+.right-align .footer-section {
+    margin-left: 20px;
 }
 
-.feature-card h3 {
-    font-size: 18px;
-    margin-bottom: 10px;
-    color: #333;
+/* Responsive Styles */
+@media (max-width: 1024px) {
+    .feature-card, .process-step {
+        width: 48%;
+    }
 }
 
-.feature-card p {
-    font-size: 14px;
-    color: #666;
+@media (max-width: 768px) {
+    .nav-menu {
+        position: fixed;
+        right: -100%;
+        top: 0;
+        height: 100vh;
+        width: 300px;
+        background: #fff;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: right 0.3s;
+        z-index: 998;
+    }
+
+    .nav-menu.active {
+        right: 0;
+    }
+
+    .nav-menu li {
+        margin: 20px 0;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .feature-card, .process-step {
+        width: 100%;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .right-align {
+        flex-direction: column;
+    }
+
+    .right-align .footer-section {
+        margin-left: 0;
+    }
 }
 
-/* FAQ Section */
-.faq {
-    text-align: center;
-}
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 32px;
+    }
 
-.faq h2 {
-    font-size: 24px;
-    color: #3B3486;
-    margin-bottom: 20px;
-}
+    .hero p {
+        font-size: 16px;
+    }
 
-.faq-item {
-    background-color: #F7F9FB;
-    border-radius: 10px;
-    padding: 15px;
-    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
-    margin: 10px 0;
-    text-align: left;
-}
+    .features h2,
+    .faq h2,
+    .process h2 {
+        font-size: 28px;
+    }
 
-.faq-item h3 {
-    font-size: 18px;
-    color: #333;
-    margin-bottom: 5px;
-}
-
-.faq-item p {
-    font-size: 14px;
-    color: #666;
+    .feature-card h3,
+    .faq-question h3,
+    .process-step h3 {
+        font-size: 20px;
+    }
 }

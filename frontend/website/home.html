@@ -1,94 +1,165 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Home</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet"href="style.css">
-        <link rel="icon" type="/jpg" href="logo.jpg">
-    </head>
-    <body>
-        <div class="banner">
-            <div class="navbar">
-                <img src="logo.jpg" class="logo">
-                <ul>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EduSphere - Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="home.css">
+    <link rel="icon" type="image/jpeg" href="logo.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <a href="#" class="logo">
+                    <img src="logo.jpg" alt="EduSphere Logo">
+                </a>
+                <ul class="nav-menu">
                     <li><a href="#">About Us</a></li>
                     <li><a href="#">Contact Us</a></li>
-                    <li><a href="#">Login</a></li>
-                </ul>                
+                    <li><a href="#" class="btn-login">Login</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
             </div>
+        </nav>
+    </header>
 
-            <div class="content">
-                 <h1>EduSphere Recommendation and Application</h1>
-                 <p>
-                    Helping you to apply for university at the comformt of your home,
-                    <br>
-                    with all the necessary information available at your finger tips
-                </p>
-                <button type="button" onclick=""><span></span><h2>Get Started</h2></button>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>EduSphere Recommendation and Application</h1>
+                <p>Apply to universities from the comfort of your home with all the necessary information at your fingertips.</p>
+                <a href="#" class="btn-primary">Get Started</a>
             </div>
         </div>
+    </section>
 
-        <div class="features-faq">
-            <!-- Features Section -->
-            <div class="features">
-                <h2>EduSphere Application Features</h2>
-                <div class="feature-cards">
-                    <div class="feature-card">
-                        <h3>Program or Course Recommendation</h3>
-                        <p>Upon knowing your results we make use of AI to reason and give you the best programs you might be willing to pursue in college. </p>
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2>EduSphere Application Features</h2>
+            <div class="feature-cards">
+                <div class="feature-card">
+                    <h3>Program Recommendations</h3>
+                    <p>We use AI to suggest the best programs based on your results and interests.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Relevant Updates</h3>
+                    <p>Stay informed about the opening and closing dates of all tertiary institutions.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Seamless Applications</h3>
+                    <p>We can apply to relevant institutions on your behalf using your provided information.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Detailed Information</h3>
+                    <p>Access in-depth details about each program to make informed decisions with certainty.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Application Process Section -->
+    <section class="process">
+        <div class="container">
+            <h2>Our Simple Application Process</h2>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3>Create an Account</h3>
+                    <p>Sign up for a free account to get started on your application journey.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3>Input Your Details</h3>
+                    <p>Provide your academic results and preferences for personalized recommendations.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3>Receive Recommendations</h3>
+                    <p>Our AI will suggest suitable programs and institutions for you.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h3>Apply Seamlessly</h3>
+                    <p>Choose your desired options and let us handle the application process.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-items">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Does it include all institutions in Eswatini?</h3>
                     </div>
-                    <div class="feature-card">
-                        <h3>Relevant Updates</h3>
-                        <p>We have all information about the opening and closing dates of all tertiary institutions so to save you the trouble of going back and forth</p>
+                    <div class="faq-answer">
+                        <p>Absolutely! From UNESWA to Limkokwing, ASIT, and other tertiary institutions in Eswatini.</p>
                     </div>
-            
-                    <div class="feature-card">
-                        <h3>Seamless Application</h3>
-                        <p>If you are willing, we can make the application to the relevant institutions on your behalf since we already have your information.</p>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What if I want to apply outside Eswatini?</h3>
                     </div>
-                    <div class="feature-card">
-                        <h3>Mandatory Information</h3>
-                        <p>About each and every program, we offer detailed information on what in if for you. This will help you make an inforamed decision with certainty</p>
+                    <div class="faq-answer">
+                        <p>This feature will soon be available.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Can I get recommendations without having symbols?</h3>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, you can interact with our AI Agent about your strengths to receive recommendations.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Is the AI Agent always right?</h3>
+                    </div>
+                    <div class="faq-answer">
+                        <p>While our AI provides insightful suggestions, we recommend personal discretion for final decisions.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Do you protect my data?</h3>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We prioritize security to ensure data confidentiality, integrity, and authentication.</p>
                     </div>
                 </div>
             </div>
-        
-            <!-- FAQ Section -->
-            <div class="faq">
-                <h2>Frequently Asked Questions</h2>
-                <div class="faq-item">
-                    <h3>Does it include all institutions in Eswatini?</h3>
-                    <p>Absolutely, from UNESWA, to Limkokwing, ASIT, and any other tertiary institturion in eswatini</p>
-                </div>
-                <div class="faq-item">
-                    <h3>What if I want to apply outside Eswatini?</h3>
-                    <p>This feature will soon be brought to life.</p>
-                </div>
-                <div class="faq-item">
-                    <h3>Can I get recommendations without having symbols</h3>
-                    <p>Yes, you can be allowed to interact with the AI Agent about your strenghts and capabilities so in that way you can get some recommendations</p>
-                </div>
-                <div class="faq-item">
-                    <h3>Is the AI Agent always right</h3>
-                    <p>TempDB offers various LLM agents that specialize in complex data analysis, predictive modeling, and natural language processing.</p>
-                </div>
-                <div class="faq-item">
-                    <h3>Do you protect my data?</h3>
-                    <p>Security is one of the important non-functional features we focus at so we can ensure data confidentiality, integrity, and authenticate [CIA].</p>
-                </div>
-            </div>
-        </div>        
-    </body>
+        </div>
+    </section>
 
+    <!-- Footer Section -->
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-section about">
                 <h2 class="logo-text">EduSphere</h2>
-                <p>Making use of cutting-edge technologies to make an impact on student application to colleges, universities and other tertiary institutions. Breaching the knowledge gap and providing data-driven decision making</p>
+                <p>
+                    Making use of cutting-edge technologies to make an impact on student application to colleges, universities, and other tertiary institutions. 
+                    Breaching the knowledge gap and providing data-driven decision making.
+                </p>
+
                 <div class="social-icons">
-                    <a href="#"><img src="x-icon.png" alt="X (Twitter)"></a>
-                    <a href="#"><img src="linkedin-icon.png" alt="LinkedIn"></a>
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                    <a href="#"><i class="fa fa-instagram"></i></a>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                    <a href="#"><i class="fa fa-github"></i></a>
                 </div>
             </div>
 
@@ -119,4 +190,33 @@
             &copy; 2024 EduSphere. All rights reserved.
         </div>
     </footer>
+
+    <!-- JavaScript for Mobile Menu and FAQ Toggle -->
+    <script>
+        // Mobile Menu Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        // FAQ Toggle
+        const faqItems = document.querySelectorAll('.faq-item');
+
+        faqItems.forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                item.classList.add('active');
+            });
+            item.addEventListener('mouseleave', () => {
+                item.classList.remove('active');
+            });
+            // For mobile devices
+            item.addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
 </html>
