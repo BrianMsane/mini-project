@@ -6,14 +6,14 @@ const axios = require('axios');
 const multer = require('multer');
 const upload = multer({ dest: 'temp/' });
 const fs = require('fs');
-const FormData = require('form-data'); // Added to handle multipart/form-data
+const FormData = require('form-data'); // To handle multipart/form-data
 
 // Initialize application
 const app = express();
 const PORT = 3019;
 
 // Middleware
-app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname, 'website'))); // Serve static files from 'website' directory
 app.use(express.urlencoded({ extended: true }));
 
 // Start server
@@ -32,21 +32,21 @@ db.once('open', () => {
 });
 
 // SCHEMAS
-// Define signup schema (corrected typo in 'signupSchema')
+// Define signup schema
 const signupSchema = new mongoose.Schema({
     username: String,
     email: String,
     password: String,
     conf_pass: String,
 });
-const SignUp = mongoose.model('SignUp', signupSchema); // Changed collection name for clarity
+const SignUp = mongoose.model('SignUp', signupSchema);
 
 // Define login schema
 const loginSchema = new mongoose.Schema({
     username: String,
     password: String,
 });
-const Login = mongoose.model('Login', loginSchema); // Corrected to use 'loginSchema'
+const Login = mongoose.model('Login', loginSchema);
 
 // Define contact-us schema
 const contactUsSchema = new mongoose.Schema({
@@ -59,7 +59,7 @@ const ContactUs = mongoose.model('ContactUs', contactUsSchema);
 // Routes
 // Serve the signup page
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, './signup/index.html'));
+    res.sendFile(path.join(__dirname, 'website', 'signup.html'));
 });
 
 // Handle signup form submission
@@ -77,7 +77,7 @@ app.post('/signup', async (req, res) => {
 
 // Serve the login page
 app.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname, './login/index.html'));
+    res.sendFile(path.join(__dirname, 'website', 'login.html'));
 });
 
 // Handle login form submission
@@ -88,12 +88,12 @@ app.post('/login', async (req, res) => {
         password,
     });
     await user.save();
-    res.sendFile(path.join(__dirname, './home/index.html'));
+    res.sendFile(path.join(__dirname, 'website', 'home.html'));
 });
 
 // Serve the about-us page
 app.get('/about-us', (req, res) => {
-    res.sendFile(path.join(__dirname, './about-us/index.html'));
+    res.sendFile(path.join(__dirname, 'website', 'about-us.html'));
 });
 
 // Handle contact-us form submission
@@ -110,9 +110,9 @@ app.post('/contact-us', async (req, res) => {
         const response = await axios.post('http://localhost:3017/contact-us', userDetails);
         if (response.status === 200) {
             console.log('Message successfully sent to the backend server!');
-            // You might want to redirect or inform the user here
+            // Optionally, you can redirect the user or show a success message
         }
-        res.sendFile(path.join(__dirname, './contact-us/index.html'));
+        res.sendFile(path.join(__dirname, 'website', 'contact-us.html'));
     } catch (error) {
         console.error('Error sending data to backend:', error);
         res.status(500).send('Failed to process the request.');
@@ -121,7 +121,7 @@ app.post('/contact-us', async (req, res) => {
 
 // Serve the error404 page
 app.get('/error404', (req, res) => {
-    res.sendFile(path.join(__dirname, './error/index.html'));
+    res.sendFile(path.join(__dirname, 'website', 'error404.html'));
 });
 
 // Handle file uploads and forward to FastAPI backend
@@ -129,7 +129,7 @@ app.post('/upload', upload.single('document'), async (req, res) => {
     const { file } = req;
 
     if (!file) {
-        return res.sendFile(path.join(__dirname, './public/error404.html'));
+        return res.sendFile(path.join(__dirname, 'website', 'error404.html'));
     }
 
     try {
@@ -152,7 +152,7 @@ app.post('/upload', upload.single('document'), async (req, res) => {
     }
 });
 
-// Authentication middleware (added to prevent errors)
+// Authentication middleware
 function checkAuthentication(req, res, next) {
     // Implement your authentication logic here
     // For now, we'll assume the user is always authenticated
@@ -161,10 +161,10 @@ function checkAuthentication(req, res, next) {
 
 // Serve the fill-form page
 app.get('/fill-form', checkAuthentication, (req, res) => {
-    res.sendFile(path.join(__dirname, './form/index.html'));
+    res.sendFile(path.join(__dirname, 'website', 'fill-form.html'));
 });
 
 // Serve the get-recommendations page
 app.get('/get-recommendations', checkAuthentication, (req, res) => {
-    res.sendFile(path.join(__dirname, './chat/index.html'));
+    res.sendFile(path.join(__dirname, 'website', 'get-recommendations.html'));
 });
