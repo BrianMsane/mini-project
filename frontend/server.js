@@ -56,6 +56,7 @@ const contactUsSchema = new mongoose.Schema({
 });
 const ContactUs = mongoose.model('ContactUs', contactUsSchema);
 
+
 // Routes
 // Serve the signup page
 app.get('/', (req, res) => {
