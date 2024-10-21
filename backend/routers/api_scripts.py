@@ -4,7 +4,7 @@
 
 import logging
 from fastapi import APIRouter, UploadFile, File, HTTPException
-from support.emails import send_email
+from utils.emails import send_email
 from utils.bodies import Email
 from utils.extract import ocr
 import os

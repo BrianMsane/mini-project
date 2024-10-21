@@ -17,7 +17,7 @@ def send_email(
     receiver_email: str,
     message: str,
     date: datetime=datetime.date.today().strftime(''),
-    sender_email: str=os.getenv('EMAIL_PASSWORD')
+    sender_email: str=os.getenv('EMAIL')
 ) -> bool:
     '''In the front-end, contact us page, the user will send query
     This should be taken in by these arguments then we compute response, forward it to their email account
@@ -38,17 +38,16 @@ def send_email(
     msg.attach(MIMEText(body, 'plain'))
 
     try:
-        # Set up the SMTP server connection
         server = smtplib.SMTP(smtp_server, smtp_port)
         server.starttls()
         server.login(sender_email, sender_password)
-        
-        # Send the email
         server.sendmail(sender_email, receiver_email, msg.as_string())
-        print(f"Email sent successfully to {receiver_email}")
     except Exception as e:
-        logging.info('Unable to connect to email server %s', e)
+        print('Unable to connect to email server %s', e)
         return False
     finally:
         server.quit()
     return True
+
+if send_email(name='brian', receiver_email='msanebrianboss@gmail.com', message='Hi Brian'):
+    print('!!!!!!!!!!!!!!!!')

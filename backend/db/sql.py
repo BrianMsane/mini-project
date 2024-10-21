@@ -16,12 +16,7 @@ DB_CONFIG = {
 
 
 def create_connection() -> Optional[mysql.connector.connection_cext.CMySQLConnection]:
-    """
-    Create and return a new MySQL database connection.
-
-    Returns:
-        mysql.connector.connection_cext.CMySQLConnection: Database connection object if successful.
-        None: If connection fails.
+    """Create and return a new MySQL database connection.
     """
     try:
         connection = mysql.connector.connect(**DB_CONFIG)
