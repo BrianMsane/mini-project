@@ -8,3 +8,4 @@ uvicorn
 fastapi
 python-multipart
 requests
+mysql-connector-python

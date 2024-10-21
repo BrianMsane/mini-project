@@ -8,6 +8,7 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import dotenv
+
 dotenv.load_dotenv()
 
 
@@ -15,9 +16,9 @@ def send_email(
     name: str,
     receiver_email: str,
     message: str,
-    date: datetime=datetime.date.today(),
+    date: datetime=datetime.date.today().strftime(''),
     sender_email: str=os.getenv('EMAIL_PASSWORD')
-):
+) -> bool:
     '''In the front-end, contact us page, the user will send query
     This should be taken in by these arguments then we compute response, forward it to their email account
     '''
@@ -30,7 +31,7 @@ def send_email(
     msg = MIMEMultipart()
     msg['From'] = sender_email.strip()
     msg['To'] = receiver_email.strip()
-    msg['Subject'] = f"Response to Your Query - {name}"
+    msg['Subject'] = f"Response to Your Query - {name} on {date}"
 
     # Body of the email
     body = f"Dear {name},\n\nThank you for reaching out to us.\n\n{message}\n\nBest regards,\nSupport Team, Edusphere"
@@ -47,5 +48,7 @@ def send_email(
         print(f"Email sent successfully to {receiver_email}")
     except Exception as e:
         logging.info('Unable to connect to email server %s', e)
+        return False
     finally:
         server.quit()
+    return True
