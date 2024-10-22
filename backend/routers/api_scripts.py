@@ -54,7 +54,7 @@ async def upload(
         await f.write(file.file.read())
 
 
-@router.post('/ocr', tag=['Symbols'])
+@router.post('/ocr', tags=['Symbols'])
 async def ocr_operation(file_path: str):
     '''OCR operation on document
     '''

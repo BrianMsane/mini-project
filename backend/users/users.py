@@ -60,7 +60,7 @@ class JSONTrait:
 
 
 @dataclass
-class Student(JSONTrait):
+class Applicant(JSONTrait):
     '''This class represents a student who is willing to apply for university'''
     demographic: Demographic
     family: Family
