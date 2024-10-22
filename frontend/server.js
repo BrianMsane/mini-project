@@ -32,7 +32,6 @@ db.once('open', () => {
 });
 
 // SCHEMAS
-// Define signup schema
 const signupSchema = new mongoose.Schema({
     username: String,
     email: String,
@@ -41,14 +40,12 @@ const signupSchema = new mongoose.Schema({
 });
 const SignUp = mongoose.model('SignUp', signupSchema);
 
-// Define login schema
 const loginSchema = new mongoose.Schema({
     username: String,
     password: String,
 });
 const Login = mongoose.model('Login', loginSchema);
 
-// Define contact-us schema
 const contactUsSchema = new mongoose.Schema({
     fullName: String,
     email: String,
@@ -82,7 +79,7 @@ app.get('/login', (req, res) => {
 });
 
 // Handle login form submission
-app.post('/login', async (req, res) => {
+app.post('/login-redirect', async (req, res) => {
     const { username, password } = req.body;
     const user = new Login({
         username,
@@ -97,8 +94,15 @@ app.get('/about-us', (req, res) => {
     res.sendFile(path.join(__dirname, 'website', 'about-us.html'));
 });
 
+
+// Serve the contact-us page
+app.get('/contact-us', (req, res) => {
+    res.sendFile(path.join(__dirname, 'website', 'contact.html'));
+});
+
+
 // Handle contact-us form submission
-app.post('/contact-us', async (req, res) => {
+app.post('/email', async (req, res) => {
     const { fullName, email, text } = req.body;
     const userDetails = {
         fullName,
@@ -107,11 +111,10 @@ app.post('/contact-us', async (req, res) => {
     };
 
     try {
-        // Send the request to the backend server
         const response = await axios.post('http://localhost:3017/contact-us', userDetails);
         if (response.status === 200) {
             console.log('Message successfully sent to the backend server!');
-            // Optionally, you can redirect the user or show a success message
+            // pop-up message in page
         }
         res.sendFile(path.join(__dirname, 'website', 'contact-us.html'));
     } catch (error) {

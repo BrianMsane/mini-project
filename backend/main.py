@@ -16,7 +16,6 @@ API to serve backend resources
 import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from support.emails import send_email
 from routers.api_scripts import router
 
 

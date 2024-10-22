@@ -6,8 +6,8 @@ import pymupdf
 from easyocr import Reader
 
 
-def ocr(path: str):
-    '''Extract text from images if symbols are in png, jpeg, jpg format or PDF documents
+def ocr(path: str) -> str:
+    '''Extract text from images if scanned symbols or certficate are in png, jpeg, jpg format or PDF documents
     '''
     ext = os.path.splitext(path)[1]
     if ext in ('.png', '.jpeg', '.jpg'):

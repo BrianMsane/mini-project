@@ -1,10 +1,15 @@
 '''Define the FASTAPI endpoints for this application
 '''
 
-from fastapi import APIRouter, UploadFile, File
-from support.emails import send_email
+
+import logging
+from fastapi import APIRouter, UploadFile, File, HTTPException
+from utils.emails import send_email
+from utils.bodies import Email
+from utils.extract import ocr
 import os
 import dotenv
+
 
 dotenv.load_dotenv()
 router = APIRouter()
@@ -18,19 +23,21 @@ async def root():
 
 
 @router.post('/contact-us', tags=['Email-Handling'])
-async def email_support(
-    name: str,
-    sender_email: str,
-    message: str
-):
+async def email_support(req: Email) -> bool:
     '''API Endpoint for handling contact-us page and visitors queries [powered by AI]
     '''
-    send_email(
-        name=name,
-        sender_email=sender_email,
-        receiver_email=os.getenv("EMAIL"),
-        message=message
-    )
+    try:
+        if send_email(
+            name=req.name,
+            sender_email=req.email,
+            receiver_email=os.getenv("EMAIL"),
+            message=req.message
+        ):
+            return True
+        return False
+    except Exception as e:
+        logging.error('Error on email support endpoint %s', e)
+        return False
 
 
 @router.post('/upload_document', tags=['Symbols'])
@@ -44,4 +51,12 @@ async def upload(
 
     file_location = os.path.join(upload_dir, file.filename)
     with open(file_location, "wb") as f:
-        f.write(file.file.read())
+        await f.write(file.file.read())
+
+
+@router.post('/ocr', tags=['Symbols'])
+async def ocr_operation(file_path: str):
+    '''OCR operation on document
+    '''
+    if file_path.endswith('.pdf'):
+        ocr(path=file_path)
