@@ -15,6 +15,9 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'website', 'index.html'));
 });
 
+app.get('/signup', (req, res) => {
+    res.sendFile(path.join(__dirname, 'website', 'signup.html'));
+});
 
 
 // Start server
