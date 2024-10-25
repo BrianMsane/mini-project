@@ -24,20 +24,41 @@ app.post('/signup', async (req, res) => {
         password,
         conf_pass,
     });
-    await user.save();
-    res.redirect(`/login?username=${username}&password=${password}`);
+
+    try{
+        const response = await axios.post('http://localhost:3017/signup', userLogin);
+        if (response.status === 200) {
+            if (response.body.athenticated === true){
+                res.redirect(`/login?username=${username}&password=${password}`);
+            }
+        }
+    } catch{
+        console.error('Error sending data to backend:', error);
+        res.status(500).send('Failed to process the request.');
+    }
 });
 
 
 // LOGIN
 app.post('/login-redirect', async (req, res) => {
     const { username, password } = req.body;
-    const user = new Login({
+    const userLogin = new Login({
         username,
         password,
     });
-    await user.save();
-    res.sendFile(path.join(__dirname, 'website', 'home.html'));
+
+    try{
+        const response = await axios.post('http://localhost:3017/authenticate', userLogin);
+        if (response.status === 200) {
+            if (response.body.athenticated === true){
+                return true;
+            }
+        }
+        res.sendFile(path.join(__dirname, 'website', 'home.html'));
+    } catch (error) {
+        console.error('Error sending data to backend:', error);
+        res.status(500).send('Failed to process the request.');
+    }
 });
 
 

@@ -4,8 +4,9 @@
 
 import logging
 from fastapi import APIRouter, UploadFile, File, HTTPException
+from db.mongo import read, create
 from utils.emails import send_email
-from utils.bodies import Email
+from utils.bodies import Email, AuthenticateReq, RegisterReq
 from utils.extract import ocr
 import os
 import dotenv
@@ -20,6 +21,29 @@ async def root():
     return {
         'message': 'This is the root endpoint'
     }
+
+
+@router.post('/authenticate', tags=['Authenicate'])
+async def authenticate(req: AuthenticateReq):
+    '''Authenticate the users on login
+    '''
+    doc = read(collecton='users', query={'username': req.username})
+    if doc:
+        if doc['password'] == req.password:
+            return True
+
+
+@router.post('/register', tags=['Authenicate'])
+async def register(req: RegisterReq):
+    '''Register users on signup
+    '''
+    doc = {
+        'username': req.username,
+        'email': req.email,
+        'password': req.password if req.conf_password == req.password else ''
+    }
+    if create(collection='users', doc=doc):
+        return True
 
 
 @router.post('/contact-us', tags=['Email-Handling'])
