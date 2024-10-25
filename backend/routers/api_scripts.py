@@ -6,7 +6,7 @@ import logging
 from fastapi import APIRouter, UploadFile, File, HTTPException
 from db.mongo import read, create
 from utils.emails import send_email
-from utils.bodies import Email, AuthenticateReq, RegisterReq
+from utils.request import Email, AuthenticateReq, RegisterReq
 from utils.extract import ocr
 import os
 import dotenv
