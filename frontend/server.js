@@ -5,7 +5,6 @@ const mongoose = require('mongoose');
 const path = require('path');
 const axios = require('axios');
 const multer = require('multer');
-const upload = multer({ dest: 'temp/' });
 const app = express();
 const PORT = 3019;
 
