@@ -2,9 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>EduSphere - Home</title>
+    <title>Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <link rel="stylesheet" href="home.css">
     <link rel="icon" type="image/jpeg" href="logo.jpg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
@@ -15,7 +17,7 @@
         <nav class="navbar">
             <div class="container">
                 <a href="#" class="logo">
-                    <img src="logo.jpg" alt="EduSphere Logo">
+                    <img src="sas black.jpg" alt="EduSphere Logo">
                 </a>
                 <ul class="nav-menu">
                     <li><a href="about_us.html">About Us</a></li>
@@ -41,6 +43,56 @@
             </div>
         </div>
     </section>
+
+
+    <!-- Slide show -->
+
+    <div class="container swiper">
+        <div class="card-wrapper">
+            <ul class="card-list swiper-wrapper">
+                <li class="card-item swiper-slide">
+                    <a href="#" class="card-link">
+                      <img src="euro.jpg"alt="Card Image"
+                       class="card-image"> 
+                        <p class="badge Service">Service fee</p>
+                        <h2 class="card-title"> We require a one time non-refundable service fee throughout the admission process.Applying students deposit their documents and information and we follow up until they get admission.</h2>
+                        <button class="card-button material-symbols-rounded">arrow_forward</button>
+                    </a>
+                </li>
+                <li class="card-item swiper-slide">
+                    <a href="#" class="card-link">
+                      <img src="thumbsup.png"alt="Card Image"
+                       class="card-image"> 
+                        <p class="badge fee">No admission fee</p>
+                        <h2 class="card-title">You pay us no admission fee before the offer is issued. This is because we are direct representatives of our partner institutions</h2>
+                        <button class="card-button material-symbols-rounded">arrow_forward</button>
+                    </a>
+                </li>
+                <li class="card-item swiper-slide">
+                    <a href="#" class="card-link">
+                      <img src="images.jfif"alt="Card Image"
+                       class="card-image"> 
+                        <p class="badge Sure_Admission">Guaranteed admission</p>
+                        <h2 class="card-title">Our rich network of educational institutions and easy access to international admission officers guarantees student admissions</h2>
+                        <button class="card-button material-symbols-rounded">arrow_forward</button>
+                    </a>
+                </li>
+                <li class="card-item swiper-slide">
+                    <a href="#" class="card-link">
+                      <img src="ships.jpg"alt="Card Image"
+                       class="card-image"> 
+                        <p class="badge Scholarships">Scholarships</p>
+                        <h2 class="card-title">Our students are provided with the best possible scholarship opportunities and updates through our task and reminder page. Students are accompanied by us in the process of obtaining scholarships. Scholarships available are merit based or need based</h2>
+                        <button class="card-button material-symbols-rounded">arrow_forward</button>
+                    </a>
+                </li>
+            </ul>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-slide-button swiper-button-prev"></div>
+            <div class="swiper-slide-button swiper-button-next"></div>
+
+        </div>
+    </div>
 
     <!-- Features Section -->
     <section class="features">
@@ -218,5 +270,7 @@
             });
         });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="slideshow.js"></script>
 </body>
 </html>
