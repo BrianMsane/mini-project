@@ -1,4 +1,4 @@
-'''API to serve backend resources
+'''Uvicorn local server to serve backend resources
 '''
 
 import uvicorn

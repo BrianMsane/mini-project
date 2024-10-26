@@ -22,7 +22,6 @@ body {
     margin: auto;
 }
 
-
 /* Application Form Section */
 .application-form {
     padding: 100px 0;
@@ -159,7 +158,6 @@ body {
 }
 
 .next-btn:hover,
-.prev-btn:hover,
 .submit-btn:hover {
     background-color: #00796b;
 }
@@ -173,8 +171,16 @@ body {
     background-color: #bdbdbd;
 }
 
-/* Footer */
-/* ... (same as previous footer styles) ... */
+/* Error Message Styles */
+.error-message {
+    color: #d32f2f;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.invalid {
+    border-color: #d32f2f;
+}
 
 /* Responsive Styles */
 @media (max-width: 768px) {

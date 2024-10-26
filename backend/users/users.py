@@ -10,10 +10,9 @@ import datetime
 @dataclass
 class Account:
     username: str
-    fullname: str
     email: str
     password: str
-    created: str=datetime.date.today().strftime('%Y-%m-%d')
+    created: str
 
 
 @dataclass
@@ -22,11 +21,20 @@ class Demographic:
     middle_name: str=None
     surname: str
     date_of_birth: str
-    gender: str
+    gender: Literal['Male', 'Female', 'Other']
+    nationality: str
+    identity_no: str
+    maritual: Literal['Single', 'Married', 'Other']
+    residence: Literal['Yes', "No"]
+    disability: Literal['Yes', 'No']
+    medical: Literal['Yes', 'No']
+
+
+@dataclass
+class Contact:
     address: str
     phone: str | list[str]
-    race: Literal['Black', 'White', 'Colored', 'Indian', 'Asian']
-    languages: list[str]
+    postal: str
 
 
 @dataclass
@@ -67,4 +75,4 @@ class Applicant(JSONTrait):
     education: EducationalBackground
     citizenship: CitizenshipResidency
     interests: list[str]
-    _type: str='users.Student'
+    _type: str='users.Applicant'

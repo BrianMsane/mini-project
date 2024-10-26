@@ -7,10 +7,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <link rel="stylesheet" href="form.css">
-    <link rel="icon" type="image/jpeg" href="logo.png">
+    <link rel="icon" type="image/jpeg" href="../images/logo.png">
 </head>
 <body>
-
     <!-- Application Form Section -->
     <section class="application-form">
         <div class="container">
@@ -255,32 +254,25 @@
         </div>
     </section>
 
-
-    <!-- JavaScript for Form Navigation -->
+    <!-- JavaScript for Form Navigation and Validation -->
     <script>
-        // Mobile Menu Toggle
-        const hamburger = document.querySelector('.hamburger');
-        const navMenu = document.querySelector('.nav-menu');
-
-        hamburger.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            hamburger.classList.toggle('active');
-        });
-
-        // Form Navigation
+        // Form Navigation and Validation
         const steps = Array.from(document.querySelectorAll('.form-step'));
-        const nextBtn = document.querySelectorAll('.next-btn');
-        const prevBtn = document.querySelectorAll('.prev-btn');
+        const nextBtns = document.querySelectorAll('.next-btn');
+        const prevBtns = document.querySelectorAll('.prev-btn');
         const form = document.getElementById('applicationForm');
-        const progressBar = document.querySelectorAll('.progress-bar .step');
+        const progressBarSteps = document.querySelectorAll('.progress-bar .step');
 
-        nextBtn.forEach((button) => {
+        nextBtns.forEach((button) => {
             button.addEventListener('click', () => {
-                changeStep('next');
+                const currentStep = button.closest('.form-step');
+                if (validateStep(currentStep)) {
+                    changeStep('next');
+                }
             });
         });
 
-        prevBtn.forEach((button) => {
+        prevBtns.forEach((button) => {
             button.addEventListener('click', () => {
                 changeStep('prev');
             });
@@ -291,22 +283,105 @@
             const active = document.querySelector('.form-step.active');
             index = steps.indexOf(active);
             steps[index].classList.remove('active');
-            progressBar[index].classList.remove('active');
+            progressBarSteps[index].classList.remove('active');
             if (direction === 'next') {
                 index++;
             } else if (direction === 'prev') {
                 index--;
             }
             steps[index].classList.add('active');
-            progressBar[index].classList.add('active');
+            progressBarSteps[index].classList.add('active');
         }
+
+        function validateStep(step) {
+            let isValid = true;
+            const inputs = step.querySelectorAll('input, textarea, select');
+            step.querySelectorAll('.error-message').forEach(el => el.remove()); // Remove existing error messages
+
+            inputs.forEach(input => {
+                if (input.hasAttribute('required')) {
+                    const fieldType = input.type;
+                    const fieldName = input.name;
+
+                    if ((fieldType === 'radio' || fieldType === 'checkbox') && !input.checked) {
+                        const checked = step.querySelector(`input[name="${fieldName}"]:checked`);
+                        if (!checked) {
+                            isValid = false;
+                            showError(input, 'This field is required.');
+                        }
+                    } else if (input.value.trim() === '') {
+                        isValid = false;
+                        showError(input, 'This field is required.');
+                    } else {
+                        // Additional validation based on input type
+                        if (fieldType === 'email' && !validateEmail(input.value)) {
+                            isValid = false;
+                            showError(input, 'Please enter a valid email address.');
+                        }
+                        if (fieldType === 'tel' && !validatePhone(input.value)) {
+                            isValid = false;
+                            showError(input, 'Please enter a valid phone number.');
+                        }
+                        if (fieldType === 'date' && !validateDate(input.value)) {
+                            isValid = false;
+                            showError(input, 'Please enter a valid date.');
+                        }
+                    }
+                }
+            });
+            return isValid;
+        }
+
+        function showError(input, message) {
+            const error = document.createElement('div');
+            error.className = 'error-message';
+            error.innerText = message;
+            input.parentElement.appendChild(error);
+            input.classList.add('invalid');
+        }
+
+        function validateEmail(email) {
+            // Simple email regex
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        <!-- function validatePhone(phone) {
+            // Simple phone regex (digits only, 10-15 digits)
+            const re = /^[0-9]{10,15}$/;
+            return re.test(phone);
+        } -->
+
+        function validateDate(date) {
+            // Check if date is valid
+            const parsedDate = Date.parse(date);
+            return !isNaN(parsedDate);
+        }
+
+        // Remove error message on input
+        const allInputs = document.querySelectorAll('input, textarea, select');
+        allInputs.forEach(input => {
+            input.addEventListener('input', () => {
+                if (input.classList.contains('invalid')) {
+                    input.classList.remove('invalid');
+                    const error = input.parentElement.querySelector('.error-message');
+                    if (error) {
+                        error.remove();
+                    }
+                }
+            });
+        });
 
         // Form Submission
         form.addEventListener('submit', (e) => {
             e.preventDefault();
-            alert('Application Submitted Successfully!');
-            form.reset();
-            window.location.href = 'index.html';
+            const currentStep = document.querySelector('.form-step.active');
+            if (validateStep(currentStep)) {
+                // Optionally, perform a final validation of all steps here
+                alert('Application Submitted Successfully!');
+                form.reset();
+                window.location.href = 'index.html';
+            }
         });
     </script>
 </body>

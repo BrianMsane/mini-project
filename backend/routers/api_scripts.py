@@ -2,9 +2,10 @@
 '''
 
 
+import datetime
 import logging
 from fastapi import APIRouter, UploadFile, File
-from db.mongo import read, create, connect
+from db.mongo import read, create
 from utils.emails import EmailSupport
 from utils.request import Email, AuthenticateReq, RegisterReq
 import os
@@ -24,12 +25,11 @@ async def root():
 
 @router.post('/authenticate', tags=['Authenicate'])
 async def authenticate(req: AuthenticateReq):
-    '''Authenticate the users on login
+    '''Authenticatin
     '''
-    collection = connect()
-    doc = read(collection=collection, query={'username': req.username})
+    doc = read(query={'username': req.username})[0]
     if doc:
-        if doc['password'] == req.password:
+        if doc.get('password') == req.password:
             return True
     return False
 
@@ -41,11 +41,12 @@ async def register(req: RegisterReq):
     doc = {
         'username': req.username,
         'email': req.email,
-        'password': req.password if req.conf_password == req.password else ''
+        'password': req.password if req.conf_password == req.password else '',
+        'date': datetime.date.today().strftime('%Y-%m-%d')
     }
-    collection = connect(collection='users')
-    if create(collection=collection, doc=doc):
+    if create(doc=doc):
         return True
+    return False
 
 
 @router.post('/contact-us', tags=['Email-Handling'])
