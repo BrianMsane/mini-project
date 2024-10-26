@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="stylesheet" href="form.css">
+    <link rel="icon" type="image/jpeg" href="logo.png">
+</head>
+<body>
+
+    <!-- Application Form Section -->
+    <section class="application-form">
+        <div class="container">
+            <h2>University Admission Application</h2>
+            <!-- Progress Bar -->
+            <div class="progress-bar">
+                <div class="step active" data-title="Personal Information"></div>
+                <div class="step" data-title="Contact Information"></div>
+                <div class="step" data-title="Next of Kin"></div>
+                <div class="step" data-title="Education Background"></div>
+                <div class="step" data-title="Program Selection"></div>
+                <div class="step" data-title="Upload Documents"></div>
+                <div class="step" data-title="Review & Submit"></div>
+            </div>
+
+            <!-- Form Start -->
+            <form id="applicationForm">
+                <!-- Step 1: Personal Information -->
+                <div class="form-step active">
+                    <h3>Personal Information</h3>
+                    <div class="form-group">
+                        <label for="firstName">First Name *</label>
+                        <input type="text" id="firstName" name="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="middleName">Middle Name</label>
+                        <input type="text" id="middleName" name="middleName">
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name *</label>
+                        <input type="text" id="lastName" name="lastName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dob">Date of Birth *</label>
+                        <input type="date" id="dob" name="dob" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Gender *</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="gender" value="Male" required> Male</label>
+                            <label><input type="radio" name="gender" value="Female" required> Female</label>
+                            <label><input type="radio" name="gender" value="Other" required> Other</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="nationality">Nationality *</label>
+                        <input type="text" id="nationality" name="nationality" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="identityNumber">Identity Number *</label>
+                        <input type="text" id="identityNumber" name="identityNumber" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Marital Status *</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="maritalStatus" value="Single" required> Single</label>
+                            <label><input type="radio" name="maritalStatus" value="Married" required> Married</label>
+                            <label><input type="radio" name="maritalStatus" value="Other" required> Other</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Do you need student residence? *</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="residence" value="Yes" required> Yes</label>
+                            <label><input type="radio" name="residence" value="No" required> No</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Do you have any disabilities? *</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="disabilities" value="Yes" required> Yes</label>
+                            <label><input type="radio" name="disabilities" value="No" required> No</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Do you have any medical conditions? *</label>
+                        <div class="radio-group">
+                            <label><input type="radio" name="medicalConditions" value="Yes" required> Yes</label>
+                            <label><input type="radio" name="medicalConditions" value="No" required> No</label>
+                        </div>
+                    </div>
+                    <div class="form-navigation">
+                        <button type="button" class="next-btn">Next</button>
+                    </div>
+                </div>
+
+                <!-- Step 2: Contact Information -->
+                <div class="form-step">
+                    <h3>Contact Information</h3>
+                    <div class="form-group">
+                        <label for="address">Address/P.O Box *</label>
+                        <textarea id="address" name="address" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="city">City/State *</label>
+                        <input type="text" id="city" name="city" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="country">Country *</label>
+                        <input type="text" id="country" name="country" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mobile">Mobile *</label>
+                        <input type="tel" id="mobile" name="mobile" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="homeTel">Home Telephone</label>
+                        <input type="tel" id="homeTel" name="homeTel">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-navigation">
+                        <button type="button" class="prev-btn">Previous</button>
+                        <button type="button" class="next-btn">Next</button>
+                    </div>
+                </div>
+
+                <!-- Step 3: Next of Kin -->
+                <div class="form-step">
+                    <h3>Next of Kin Information</h3>
+                    <div class="form-group">
+                        <label for="kinFirstName">First Name *</label>
+                        <input type="text" id="kinFirstName" name="kinFirstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="kinMiddleName">Middle Name</label>
+                        <input type="text" id="kinMiddleName" name="kinMiddleName">
+                    </div>
+                    <div class="form-group">
+                        <label for="kinLastName">Last Name *</label>
+                        <input type="text" id="kinLastName" name="kinLastName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="relationship">Relationship *</label>
+                        <input type="text" id="relationship" name="relationship" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="kinMobile">Mobile *</label>
+                        <input type="tel" id="kinMobile" name="kinMobile" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="kinEmail">Email Address *</label>
+                        <input type="email" id="kinEmail" name="kinEmail" required>
+                    </div>
+                    <div class="form-navigation">
+                        <button type="button" class="prev-btn">Previous</button>
+                        <button type="button" class="next-btn">Next</button>
+                    </div>
+                </div>
+
+                <!-- Step 4: Education Background -->
+                <div class="form-step">
+                    <h3>Education Background</h3>
+                    <div class="form-group">
+                        <label for="previousSchool">Previous School Attended *</label>
+                        <input type="text" id="previousSchool" name="previousSchool" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="qualifications">Qualifications Obtained *</label>
+                        <textarea id="qualifications" name="qualifications" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="grades">Grades *</label>
+                        <textarea id="grades" name="grades" required></textarea>
+                    </div>
+                    <div class="form-navigation">
+                        <button type="button" class="prev-btn">Previous</button>
+                        <button type="button" class="next-btn">Next</button>
+                    </div>
+                </div>
+
+                <!-- Step 5: Program Selection -->
+                <div class="form-step">
+                    <h3>Program Selection</h3>
+                    <div class="form-group">
+                        <label for="preferredProgram">Preferred Program of Study *</label>
+                        <select id="preferredProgram" name="preferredProgram" required>
+                            <option value="">Select Program</option>
+                            <!-- Add program options here -->
+                            <option value="Computer Science">Computer Science</option>
+                            <option value="Engineering">Engineering</option>
+                            <option value="Business Administration">Business Administration</option>
+                            <!-- ... -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="alternativeProgram">Alternative Program</label>
+                        <select id="alternativeProgram" name="alternativeProgram">
+                            <option value="">Select Program</option>
+                            <!-- Add program options here -->
+                            <option value="Information Systems">Information Systems</option>
+                            <option value="Mechanical Engineering">Mechanical Engineering</option>
+                            <option value="Marketing">Marketing</option>
+                            <!-- ... -->
+                        </select>
+                    </div>
+                    <div class="form-navigation">
+                        <button type="button" class="prev-btn">Previous</button>
+                        <button type="button" class="next-btn">Next</button>
+                    </div>
+                </div>
+
+                <!-- Step 6: Upload Documents -->
+                <div class="form-step">
+                    <h3>Upload Documents</h3>
+                    <div class="form-group">
+                        <label for="passportPhoto">Passport Photo *</label>
+                        <input type="file" id="passportPhoto" name="passportPhoto" accept="image/*" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="idDocument">Identity Document *</label>
+                        <input type="file" id="idDocument" name="idDocument" accept=".pdf,.jpg,.png" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="transcripts">Academic Transcripts *</label>
+                        <input type="file" id="transcripts" name="transcripts" accept=".pdf,.jpg,.png" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="certificates">Certificates *</label>
+                        <input type="file" id="certificates" name="certificates" accept=".pdf,.jpg,.png" required>
+                    </div>
+                    <div class="form-navigation">
+                        <button type="button" class="prev-btn">Previous</button>
+                        <button type="button" class="next-btn">Next</button>
+                    </div>
+                </div>
+
+                <!-- Step 7: Review & Submit -->
+                <div class="form-step">
+                    <h3>Review & Submit</h3>
+                    <p>Please review your information before submitting your application.</p>
+                    <!-- You can add a summary of the user's input here -->
+                    <div class="form-navigation">
+                        <button type="button" class="prev-btn">Previous</button>
+                        <button type="submit" class="submit-btn">Submit Application</button>
+                    </div>
+                </div>
+            </form>
+            <!-- Form End -->
+        </div>
+    </section>
+
+
+    <!-- JavaScript for Form Navigation -->
+    <script>
+        // Mobile Menu Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        // Form Navigation
+        const steps = Array.from(document.querySelectorAll('.form-step'));
+        const nextBtn = document.querySelectorAll('.next-btn');
+        const prevBtn = document.querySelectorAll('.prev-btn');
+        const form = document.getElementById('applicationForm');
+        const progressBar = document.querySelectorAll('.progress-bar .step');
+
+        nextBtn.forEach((button) => {
+            button.addEventListener('click', () => {
+                changeStep('next');
+            });
+        });
+
+        prevBtn.forEach((button) => {
+            button.addEventListener('click', () => {
+                changeStep('prev');
+            });
+        });
+
+        function changeStep(direction) {
+            let index = 0;
+            const active = document.querySelector('.form-step.active');
+            index = steps.indexOf(active);
+            steps[index].classList.remove('active');
+            progressBar[index].classList.remove('active');
+            if (direction === 'next') {
+                index++;
+            } else if (direction === 'prev') {
+                index--;
+            }
+            steps[index].classList.add('active');
+            progressBar[index].classList.add('active');
+        }
+
+        // Form Submission
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Application Submitted Successfully!');
+            form.reset();
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>

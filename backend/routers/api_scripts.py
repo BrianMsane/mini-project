@@ -26,9 +26,8 @@ async def root():
 async def authenticate(req: AuthenticateReq):
     '''Authenticate the users on login
     '''
-    connect()
-    doc = read(query={'username': req.username})
-    print(doc)
+    collection = connect()
+    doc = read(collection=collection, query={'username': req.username})
     if doc:
         if doc['password'] == req.password:
             return True
