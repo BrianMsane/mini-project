@@ -27,23 +27,20 @@ class EmailSupport:
         self.sender_email = sender_email
         self.message = message
         self.name = name
+        
         self.date = datetime.date.today().strftime('%Y-%m-%d')
         self.sender_password = os.getenv('EMAIL_PASSWORD')
         self.admin_email = os.getenv('EMAIL')
         self.openai_api_key = os.getenv('OPENAI_API_KEY')
         openai.api_key = self.openai_api_key
 
+        self.smtp_server: str="smtp.gmail.com",
+        self.smtp_port: int=465
 
-    def send_email(
-        self,
-        smtp_server: str="smtp.gmail.com",
-        smtp_port: int=465
-    ) -> bool:
+
+    def send_email(self) -> bool:
         '''Send the user query to admin email so they can attend and respond to it manually
-        '''
-        smtp_server = smtp_server
-        smtp_port = smtp_port
-        
+        '''        
         em = EmailMessage()
         em['From'] = self.send_email
         em['To'] = self.admin_email
@@ -52,7 +49,7 @@ class EmailSupport:
         context = ssl.create_default_context()
 
         try:
-            with smtplib.SMTP_SSL(smtp_server, smtp_port, context=context) as smtp:
+            with smtplib.SMTP_SSL(self.smtp_server, self.smtp_port, context=context) as smtp:
                 smtp.login(self.sender_email, self.sender_password)
                 smtp.sendmail(self.sender_email, self.admin_email, em.as_string())
                 print("Email sent successfully to admin.")
@@ -61,13 +58,7 @@ class EmailSupport:
             return False
 
 
-    def ai_response(
-        self,
-        smtp_server: str="smtp.gmail.com",
-        smtp_port: int=587,
-        model: str='gpt-40-mini',
-        system_message: str='You are a helpful assistant'
-    ) -> bool:
+    def ai_response(self) -> bool:
         '''If query is easy, let an AI Agent handle the job on behalf of admin
         '''
         pass

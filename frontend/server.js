@@ -6,17 +6,38 @@ const path = require('path');
 const axios = require('axios');
 const multer = require('multer');
 const app = express();
-const PORT = 3019;
+const PORT = 3016;
 
 
 // HOME PAGE
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'website', 'index.html'));
 });
+app.get('/contact', (req, res) => {
+    res.sendFile(path.join(__dirname, 'website', 'contact.html'));
+});
+app.get('/about', (req, res) => {
+    res.sendFile(path.join(__dirname, 'website', 'about_us.html'));
+});
+app.get('/form', (req, res) => {
+    res.sendFile(path.join(__dirname, 'website', 'form.html'));
+});
+app.get('/error', (req, res) => {
+    res.sendFile(path.join(__dirname, 'website', 'error.html'));
+});
+app.get('/recommend', (req, res) => {
+    res.sendFile(path.join(__dirname, 'website', 'recommend.html'));
+});
+app.get('/signin', (req, res) => {
+    res.sendFile(path.join(__dirname, 'website', 'signin.html'));
+});
+app.get('/signup', (req, res) => {
+    res.sendFile(path.join(__dirname, 'website', 'signup.html'));
+});
 
 
 // SIGN UP
-app.post('/signup', async (req, res) => {
+app.post('/signup-process', async (req, res) => {
     const { username, email, password, conf_pass } = req.body;
     const user = new SignUp({
         username,
@@ -40,7 +61,7 @@ app.post('/signup', async (req, res) => {
 
 
 // LOGIN
-app.post('/login-redirect', async (req, res) => {
+app.post('/login-process', async (req, res) => {
     const { username, password } = req.body;
     const userLogin = new Login({
         username,
@@ -51,6 +72,7 @@ app.post('/login-redirect', async (req, res) => {
         const response = await axios.post('http://localhost:3017/authenticate', userLogin);
         if (response.status === 200) {
             if (response.body.athenticated === true){
+                console.log("Login Successful!")
                 return true;
             }
         }

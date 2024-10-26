@@ -4,33 +4,56 @@
 
 import os
 import logging
+from functools import wraps
 from typing import Optional, Any, List, Union, Callable
 from pymongo import MongoClient
 from dotenv import load_dotenv
 load_dotenv()
 
 
+# def connect(
+#         func: Optional[Callable] = None,
+#         *,
+#         string: Optional[str] = os.environ.get("MONGO_CONNECTION_STRING"),
+#         database: Optional[str] = os.environ.get("DATABASE"),
+#         collection: Optional[str] = os.environ.get("COLLECTION"),
+#         close: bool = True
+# ) -> Any:
+#     '''MongoDB client connection decorator'''
+
+#     def decorator(func: Callable):
+#         @wraps(func)
+#         def wrapper(*args, **kwargs):
+#             client = MongoClient(string)
+#             db = client[database]
+#             conn = db[collection]
+#             try:
+#                 result = func(conn, *args, **kwargs)
+#             finally:
+#                 if close:
+#                     client.close()
+#             return result
+#         return wrapper
+
+#     if callable(func):
+#         return decorator(func)
+#     else:
+#         return decorator
+
+
 def connect(
-        string: Optional[str]=os.environ["MONGO_CONNECTION_STRING"],
-        database: Optional[str]=os.environ["DATABASE"],
-        collection: Optional[str]=os.environ["COLLECTION"],
-        close: bool=True
-) -> Any:
-    '''MongoDB client connnection decorator
+    string: Optional[str] = os.environ.get("MONGO_CONNECTION_STRING"),
+    database: Optional[str] = os.environ.get("DATABASE"),
+    collection: Optional[str] = os.environ.get("COLLECTION"),
+):
+    '''connect to mongodb
     '''
-    def decorator(func: Callable):
-        def wrapper(*args, **kwargs):
-            client = MongoClient(string)
-            db = client[database]
-            connection = db[collection]
-            func(connection, *args, **kwargs)
-            if close:
-                client.close()
-        return wrapper
-    return decorator
+    client = MongoClient(string)
+    db = client[database]
+    conn = db[collection]
+    return conn
 
 
-@connect
 def create(
     collection: MongoClient,
     doc: Union[dict, list]
@@ -48,7 +71,6 @@ def create(
         return False
 
 
-@connect
 def update(
     collection: MongoClient,
     query: dict,
@@ -67,7 +89,6 @@ def update(
         return False
 
 
-@connect
 def read(
     collection: MongoClient,
     query: dict
@@ -81,7 +102,6 @@ def read(
         return None
 
 
-@connect
 def delete(
     collection: MongoClient,
     del_query: dict

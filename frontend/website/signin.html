@@ -2,12 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Login - EduSphere</title>
+    <title>Login</title>
     <link rel="stylesheet" href="signin.css">
     <link rel="icon" type="image/jpeg" href="logo.png">
-    <!-- Google Fonts -->
     <link href='https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap' rel='stylesheet'>
-    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <script>
         // Autofill the username and password fields based on query parameters
@@ -21,7 +19,7 @@
 <body>
     <div class="container">
         <div class="wrapper">
-            <form id="form" action="" method="post">
+            <form id="form" action="http://127.0.0.1:3016/login-process" method="post" onsubmit="return validateForm()">
                 <h1>Login</h1>
                 <div class="input-box">
                     <i class="fas fa-user"></i>
@@ -33,18 +31,13 @@
                     <input type="password" id="password" placeholder="Password" required>
                     <span id="pass_error"></span>
                 </div>
-                <!-- <div class="remember-forgot">
-                    <label><input type="checkbox"> Remember me</label>
-                    <a href="#">Forgot password?</a>
-                </div> -->
                 <button type="submit" class="btn">Login</button>
                 <div class="register-link">
-                    <p>Don't have an account? <a href="signup.html">Register</a></p>
+                    <p>Don't have an account? <a href="http://127.0.0.1:3016/signup">Register</a></p>
                 </div>
             </form>
         </div>
     </div>
-    <!-- Include your JavaScript file if needed -->
-    <!-- <script src="signin.js"></script> -->
+    <script src="signin.js"></script>
 </body>
 </html>

@@ -10,6 +10,7 @@ from easyocr import Reader
 
 class Symbols(BaseModel):
     symbols: list[dict[str, Any]]
+    _type: str='symbols'
 
 
 class SymbolsExtraction:
@@ -46,8 +47,10 @@ class SymbolsExtraction:
     def parse(text: str) -> Symbols:
         '''Parse the extracted information to get the symbols
         '''
+        pass
 
 
     def redact(path: str):
         '''Redact sensitive information fromt the document
         '''
+        pass

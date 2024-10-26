@@ -3,11 +3,10 @@
 
 
 import logging
-from fastapi import APIRouter, UploadFile, File, HTTPException
-from db.mongo import read, create
-from utils.emails import send_email
+from fastapi import APIRouter, UploadFile, File
+from db.mongo import read, create, connect
+from utils.emails import EmailSupport
 from utils.request import Email, AuthenticateReq, RegisterReq
-from utils.extract import ocr
 import os
 import dotenv
 
@@ -27,10 +26,13 @@ async def root():
 async def authenticate(req: AuthenticateReq):
     '''Authenticate the users on login
     '''
-    doc = read(collecton='users', query={'username': req.username})
+    connect()
+    doc = read(query={'username': req.username})
+    print(doc)
     if doc:
         if doc['password'] == req.password:
             return True
+    return False
 
 
 @router.post('/register', tags=['Authenicate'])
@@ -42,7 +44,8 @@ async def register(req: RegisterReq):
         'email': req.email,
         'password': req.password if req.conf_password == req.password else ''
     }
-    if create(collection='users', doc=doc):
+    collection = connect(collection='users')
+    if create(collection=collection, doc=doc):
         return True
 
 
@@ -51,12 +54,8 @@ async def email_support(req: Email) -> bool:
     '''API Endpoint for handling contact-us page and visitors queries [powered by AI]
     '''
     try:
-        if send_email(
-            name=req.name,
-            sender_email=req.email,
-            receiver_email=os.getenv("EMAIL"),
-            message=req.message
-        ):
+        email = EmailSupport(sender_email=req.email, message=req.message, name=req.name)
+        if email.send_email():
             return True
         return False
     except Exception as e:
@@ -76,11 +75,3 @@ async def upload(
     file_location = os.path.join(upload_dir, file.filename)
     with open(file_location, "wb") as f:
         await f.write(file.file.read())
-
-
-@router.post('/ocr', tags=['Symbols'])
-async def ocr_operation(file_path: str):
-    '''OCR operation on document
-    '''
-    if file_path.endswith('.pdf'):
-        ocr(path=file_path)
