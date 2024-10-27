@@ -7,7 +7,9 @@ const axios = require('axios');
 const multer = require('multer');
 const FormData = require('form-data');
 const fs = require('fs');
+const session = require('express-session');
 const app = express();
+const upload = multer({ dest: 'temp_uploads/' });
 const PORT = 3016;
 
 
@@ -15,7 +17,27 @@ const PORT = 3016;
 app.use(express.static(path.join(__dirname, 'website')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-const upload = multer({ dest: 'temp_uploads/' });
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'website'));
+
+
+
+// CHECK ATUTHENTICATION
+function checkAuth(req, res, next) {
+    if (req.session && req.session.isAuthenticated) {
+        next();
+    } else {
+        res.redirect('/signin?error=unauthorized');
+    }
+}
+
+// SESSION MANAGEMENT
+app.use(session({
+    secret: 'brian_key',
+    resave: false,
+    saveUninitialized: false,
+    cookie: { secure: false } // HTTP
+}));
 
 
 // PAGES
@@ -28,7 +50,10 @@ app.get('/contact', (req, res) => {
 app.get('/about', (req, res) => {
     res.sendFile(path.join(__dirname, 'website', 'about_us.html'));
 });
-app.get('/form', (req, res) => {
+app.get('/dashboard', checkAuth, (req, res) => {
+    res.render('dashboard', { username: req.session.username });
+});
+app.get('/form', checkAuth, (req, res) => {
     res.sendFile(path.join(__dirname, 'website', 'form.html'));
 });
 app.get('/error', (req, res) => {
@@ -43,12 +68,40 @@ app.get('/signin', (req, res) => {
 app.get('/signup', (req, res) => {
     res.sendFile(path.join(__dirname, 'website', 'signup.html'));
 });
+app.get('/logout', (req, res) => {
+    req.session.destroy(err => {
+        if (err) {
+            console.error('Error destroying session:', err);
+        }
+        res.redirect('/signin');
+    });
+});
+app.get('/modify-details', checkAuth, (req, res) => {
+    // Fetch user details if necessary
+    const user = {
+        email: req.session.email || '',
+        // Add other user details as needed
+    };
+    res.render('modify_details', { user });
+});
+app.get('/admission-status', checkAuth, (req, res) => {
+    // Fetch admission status from the backend or database
+    const admissionStatus = 'Pending'; // Replace with actual status
+    res.render('admission_status', { admissionStatus });
+});
+app.get('/resources', checkAuth, (req, res) => {
+    res.sendFile(path.join(__dirname, 'website', 'resources.html'));
+});
+
 
 
 // SIGN UP
 app.post('/signup-process', async (req, res) => {
     try {
-        const response = await axios.post('http://localhost:3017/register', req.body);
+        const response = await axios.post('http://localhost:3017/register', req.body, {
+            headers: req.headers,
+        });
+
         if (response.status === 200) {
             if (response.data.authenticated === true) {
                 res.redirect(`/login?username=${userLogin.username}&password=${userLogin.password}`);
@@ -66,10 +119,15 @@ app.post('/signup-process', async (req, res) => {
 // LOGIN
 app.post('/login-process', async (req, res) => {
     try {
-        const response = await axios.post('http://localhost:3017/authenticate', req.body);
+        const response = await axios.post('http://localhost:3017/authenticate', req.body, {
+            headers: req.headers
+        });
+        
         if (response.status === 200) {
             if (response.data.authenticated === true) {
-                res.redirect('/dashboard'); // Redirect to a dashboard or home page
+                req.session.isAuthenticated = true;
+                req.session.username = userLogin.username;
+                res.redirect('/dashboard'); // Redirect to the dashboard
             } else {
                 res.redirect('/signin?error=invalid_credentials');
             }
@@ -84,7 +142,9 @@ app.post('/login-process', async (req, res) => {
 // CONTACT US
 app.post('/email', async (req, res) => {
     try {
-        const response = await axios.post('http://localhost:3017/contact-us', req.body);
+        const response = await axios.post('http://localhost:3017/contact-us', req.body, {
+            headers: req.headers
+        });
         if (response.status === 200) {
             res.sendFile(path.join(__dirname, 'website', 'contact-us.html'));
         } else {
@@ -97,8 +157,38 @@ app.post('/email', async (req, res) => {
 });
 
 
+// MODIFY YOUR DETAILS
+app.post('/modify-details-process', checkAuth, async (req, res) => {
+    const updatedDetails = req.body;
+    const username = req.session.username;
+
+    try {
+        // Send updated details to the backend
+        const response = await axios.post('http://localhost:3017/modify-details', {
+            username,
+            ...updatedDetails
+        }, {
+            headers: { 'Content-Type': 'application/json' }
+        });
+
+        if (response.status === 200 && response.data.success === true) {
+            // Update session data if necessary
+            req.session.email = updatedDetails.email || req.session.email;
+            // Redirect back to the dashboard or show a success message
+            res.redirect('/dashboard');
+        } else {
+            res.redirect('/modify-details?error=update_failed');
+        }
+    } catch (error) {
+        console.error('Error updating details:', error);
+        res.status(500).send('Failed to process the request.');
+    }
+});
+
+
+
 // FORM PROCESSING
-app.post('/form-process', upload.any(), async (req, res) => {
+app.post('/form-process', checkAuth, upload.any(), async (req, res) => {
     // Extract form data and files
     const formData = req.body;
     const files = req.files;

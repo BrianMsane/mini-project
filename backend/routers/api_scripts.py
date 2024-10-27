@@ -66,7 +66,22 @@ async def email_support(req: EmailReq) -> bool:
         logging.error('Error on email support endpoint %s', e)
         return False
 
-   
+
+@router.post('/modify-details', tags=['User'])
+async def modify_details(req: Request):
+    '''Modify user details'''
+    data = await req.json()
+    username = data.get('username')
+    email = data.get('email')
+    password = data.get('password')
+
+    # Implement logic to update user details in the database
+    success = update_user_details(username, email, password)
+
+    return {"success": success}
+
+
+
 @router.post('/form', tags=['Application'])
 async def form(req: Request):
     '''Get the data in the form and store it'''
