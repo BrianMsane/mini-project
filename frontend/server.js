@@ -8,8 +8,13 @@ const multer = require('multer');
 const app = express();
 const PORT = 3016;
 
+// MIDDLEWARE TO SERVE STATIC FILES AND PARSE REQUEST BODIES
+app.use(express.static(path.join(__dirname, 'website')));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// HOME PAGE
+
+// PAGES
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'website', 'index.html'));
 });
@@ -81,6 +86,21 @@ app.post('/email', async (req, res) => {
         const response = await axios.post('http://localhost:3017/contact-us', userDetails);
         if (response.status === 200) {
             res.sendFile(path.join(__dirname, 'website', 'contact-us.html'));
+        }
+    } catch (error) {
+        console.error('Error sending data to backend:', error);
+        res.status(500).send('Failed to process the request.');
+    }
+});
+
+
+// FROM
+app.post('/form-process', async (req, res) => {
+    const formData = req.body;
+    try {
+        const response = await axios.post('http://localhost:3017/contact-us', formData);
+        if (response.status === 200) {
+            res.sendFile(path.join(__dirname, 'website', 'recommend.html'));
         }
     } catch (error) {
         console.error('Error sending data to backend:', error);
