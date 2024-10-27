@@ -2,11 +2,12 @@
 '''
 
 
+import datetime
 import logging
-from fastapi import APIRouter, UploadFile, File, HTTPException
-from utils.emails import send_email
-from utils.bodies import Email
-from utils.extract import ocr
+from fastapi import APIRouter, UploadFile, File
+from db.mongo import read, create
+from utils.emails import EmailSupport
+from utils.request import EmailReq, AuthenticateReq, RegisterReq, FormReq
 import os
 import dotenv
 
@@ -22,17 +23,39 @@ async def root():
     }
 
 
+@router.post('/authenticate', tags=['Authenicate'])
+async def authenticate(req: AuthenticateReq):
+    '''Authenticatin
+    '''
+    doc = read(query={'username': req.username})[0]
+    if doc:
+        if doc.get('password') == req.password:
+            return True
+    return False
+
+
+@router.post('/register', tags=['Authenicate'])
+async def register(req: RegisterReq):
+    '''Register users on signup
+    '''
+    doc = {
+        'username': req.username,
+        'email': req.email,
+        'password': req.password if req.conf_password == req.password else '',
+        'date': datetime.date.today().strftime('%Y-%m-%d')
+    }
+    if create(doc=doc):
+        return True
+    return False
+
+
 @router.post('/contact-us', tags=['Email-Handling'])
-async def email_support(req: Email) -> bool:
+async def email_support(req: EmailReq) -> bool:
     '''API Endpoint for handling contact-us page and visitors queries [powered by AI]
     '''
     try:
-        if send_email(
-            name=req.name,
-            sender_email=req.email,
-            receiver_email=os.getenv("EMAIL"),
-            message=req.message
-        ):
+        email = EmailSupport(sender_email=req.email, message=req.message, name=req.name)
+        if email.send_email():
             return True
         return False
     except Exception as e:
@@ -54,9 +77,8 @@ async def upload(
         await f.write(file.file.read())
 
 
-@router.post('/ocr', tags=['Symbols'])
-async def ocr_operation(file_path: str):
-    '''OCR operation on document
+@router.post('/form')
+async def form(req: FormReq):
+    '''Get the data in the form and store it
     '''
-    if file_path.endswith('.pdf'):
-        ocr(path=file_path)
+    pass

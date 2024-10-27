@@ -1,72 +1,72 @@
 '''Attend to user emails
 '''
 
-# pylint: disable=line-too-long
-
-
 import os
-import logging
 import datetime
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from email.message import EmailMessage
 from dotenv import load_dotenv
+import openai
+import ssl
 
 load_dotenv()
 
 
 class EmailSupport:
-    '''Support Contact us feature
+    '''Support Contact Us feature
     '''
 
     def __init__(
         self,
-        date: datetime=datetime.date.today().strftime(''),
-        sender_email: str=os.getenv('EMAIL')
+        sender_email: str = None,
+        message: str = None,
+        name: str = None,
     ):
-        self.data = date
         self.sender_email = sender_email
+        self.message = message
+        self.name = name
+        
+        self.date = datetime.date.today().strftime('%Y-%m-%d')
+        self.sender_password = os.getenv('EMAIL_PASSWORD')
+        self.admin_email = os.getenv('EMAIL')
+        self.openai_api_key = os.getenv('OPENAI_API_KEY')
+        openai.api_key = self.openai_api_key
+
+        self.smtp_server: str="smtp.gmail.com",
+        self.smtp_port: int=465
 
 
-    def send_email(
-        self,
-        name: str,
-        receiver_email: str,
-        message: str
-    ) -> bool:
+    def send_email(self) -> bool:
         '''Send the user query to admin email so they can attend and respond to it manually
-        '''
-        # Set up the SMTP server
-        smtp_server = "smtp.gmail.com"
-        smtp_port = 587
-        password = os.getenv('EMAIL_PASSWORD')
-
-        # Create the email message
-        msg = MIMEMultipart()
-        msg['From'] = self.sender_email.strip()
-        msg['To'] = receiver_email.strip()
-        msg['Subject'] = f"Response to Your Query - {name} on {self.date}"
-        body = f"Dear {name},\n\nThank you for reaching out to us.\n\n{message}\n\nBest regards,\nSupport Team, Edusphere"
-        msg.attach(MIMEText(body, 'plain'))
+        '''        
+        em = EmailMessage()
+        em['From'] = self.send_email
+        em['To'] = self.admin_email
+        em['Subject'] = f"New Support Query from {self.name} on {self.date}"
+        em.set_content(self.message)
+        context = ssl.create_default_context()
 
         try:
-            server = smtplib.SMTP(smtp_server, smtp_port)
-            server.starttls()
-            server.login(self.sender_email, password)
-            server.sendmail(self.sender_email, receiver_email, msg.as_string())
+            with smtplib.SMTP_SSL(self.smtp_server, self.smtp_port, context=context) as smtp:
+                smtp.login(self.sender_email, self.sender_password)
+                smtp.sendmail(self.sender_email, self.admin_email, em.as_string())
+                print("Email sent successfully to admin.")
         except Exception as e:
-            print('Unable to connect to email server %s', e)
+            print(f'Unable to send email: {e}')
             return False
-        finally:
-            server.quit()
-        return True
 
 
-    def ai_response(
-        self,
-        name: str,
-        receiver_email: str,
-        message: str,
-    ):
+    def ai_response(self) -> bool:
         '''If query is easy, let an AI Agent handle the job on behalf of admin
         '''
+        pass
+
+
+
+# Example usage
+if __name__ == '__main__':
+    email_support = EmailSupport(sender_email='msanebrianboss@gmail.com', message='Testing', name='Kuhle')
+    if email_support.send_email():
+        print('!!!!!!!!!!!!!!!!!!!!')
