@@ -7,7 +7,7 @@ import logging
 from fastapi import APIRouter, UploadFile, File
 from db.mongo import read, create
 from utils.emails import EmailSupport
-from utils.request import Email, AuthenticateReq, RegisterReq
+from utils.request import EmailReq, AuthenticateReq, RegisterReq, FormReq
 import os
 import dotenv
 
@@ -50,7 +50,7 @@ async def register(req: RegisterReq):
 
 
 @router.post('/contact-us', tags=['Email-Handling'])
-async def email_support(req: Email) -> bool:
+async def email_support(req: EmailReq) -> bool:
     '''API Endpoint for handling contact-us page and visitors queries [powered by AI]
     '''
     try:
@@ -75,3 +75,10 @@ async def upload(
     file_location = os.path.join(upload_dir, file.filename)
     with open(file_location, "wb") as f:
         await f.write(file.file.read())
+
+
+@router.post('/form')
+async def form(req: FormReq):
+    '''Get the data in the form and store it
+    '''
+    pass

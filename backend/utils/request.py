@@ -5,7 +5,7 @@
 from pydantic import BaseModel
 
 
-class Email(BaseModel):
+class EmailReq(BaseModel):
     '''Contact Us request body'''
     name: str
     email: str
@@ -24,3 +24,7 @@ class RegisterReq(BaseModel):
     email: str
     password: str
     conf_password: str
+
+
+class FormReq(BaseModel):
+    '''Form request body'''

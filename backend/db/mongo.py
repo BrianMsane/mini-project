@@ -71,7 +71,7 @@ def create(
             return True
         conn.insert_many(doc)
         return True
-    except Exception as e:  # pylint: disable=broad-except
+    except Exception as e:
         logging.error("Error, unable to create records! %s", e)
         return False
 
@@ -112,7 +112,7 @@ def read(
         db = client[database]
         conn = db[collection]
         return list(conn.find(query))
-    except Exception as e:  # pylint: disable=broad-except
+    except Exception as e:
         logging.error("Error, unable to read records! %s", e)
         return None
 
@@ -134,6 +134,6 @@ def delete(
             return True
         conn.delete_one(del_query)
         return True
-    except Exception as e:  # pylint: disable=broad-except
+    except Exception as e:
         logging.error("Error, unable to delete records! %s", e)
         return False

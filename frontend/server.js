@@ -34,18 +34,14 @@ app.get('/signin', (req, res) => {
 app.get('/signup', (req, res) => {
     res.sendFile(path.join(__dirname, 'website', 'signup.html'));
 });
+app.get('/form', (req, res) => {
+    res.sendFile(path.join(__dirname, 'website', 'form.html'));
+});
 
 
 // SIGN UP
 app.post('/signup-process', async (req, res) => {
-    const { username, email, password, conf_pass } = req.body;
-    const user = new SignUp({
-        username,
-        email,
-        password,
-        conf_pass,
-    });
-
+    const userLogin = req.body;
     try{
         const response = await axios.post('http://localhost:3017/signup', userLogin);
         if (response.status === 200) {
@@ -62,21 +58,15 @@ app.post('/signup-process', async (req, res) => {
 
 // LOGIN
 app.post('/login-process', async (req, res) => {
-    const { username, password } = req.body;
-    const userLogin = new Login({
-        username,
-        password,
-    });
-
+    const userLogin = req.body;
     try{
         const response = await axios.post('http://localhost:3017/authenticate', userLogin);
         if (response.status === 200) {
             if (response.body.athenticated === true){
-                console.log("Login Successful!")
+                res.redirect("/login");
                 return true;
             }
         }
-        res.sendFile(path.join(__dirname, 'website', 'home.html'));
     } catch (error) {
         console.error('Error sending data to backend:', error);
         res.status(500).send('Failed to process the request.');
@@ -86,20 +76,12 @@ app.post('/login-process', async (req, res) => {
 
 // CONTACT US
 app.post('/email', async (req, res) => {
-    const { fullName, email, text } = req.body;
-    const userDetails = {
-        fullName,
-        email,
-        text,
-    };
-
+    const userDetails = req.body;
     try {
         const response = await axios.post('http://localhost:3017/contact-us', userDetails);
         if (response.status === 200) {
-            console.log('Message successfully sent to the backend server!');
-            // pop-up message in page
+            res.sendFile(path.join(__dirname, 'website', 'contact-us.html'));
         }
-        res.sendFile(path.join(__dirname, 'website', 'contact-us.html'));
     } catch (error) {
         console.error('Error sending data to backend:', error);
         res.status(500).send('Failed to process the request.');

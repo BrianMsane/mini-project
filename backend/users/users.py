@@ -4,7 +4,6 @@
 from dataclasses import dataclass, asdict
 from typing import Literal
 import json
-import datetime
 
 
 @dataclass
@@ -33,30 +32,29 @@ class Demographic:
 @dataclass
 class Contact:
     address: str
+    region: str
+    country: str
     phone: str | list[str]
-    postal: str
+    telephone: str
+    email: str
 
 
 @dataclass
-class Family:
-    parents: list[str]
-    contacts: list[str]=None
-    address: str
-    area: str
+class NextofKin:
+    firstname: str
+    middlename: str
+    surname: str
+    relationship: str
+    phone: str
+    email: str
 
 
 @dataclass
 class EducationalBackground:
-    name: str
-    addresss: str
-    telephone: str
-
-
-@dataclass
-class CitizenshipResidency:
-    citizenship_status: str
-    country_of_birth: str
-    state_residency: str
+    school: str
+    qualifications: str
+    grades: str
+    stream: str
 
 
 @dataclass
@@ -69,10 +67,10 @@ class JSONTrait:
 
 @dataclass
 class Applicant(JSONTrait):
-    '''This class represents a student who is willing to apply for university'''
+    '''This class represents a student who is willing to apply for university
+    '''
     demographic: Demographic
-    family: Family
+    kin: NextofKin
     education: EducationalBackground
-    citizenship: CitizenshipResidency
     interests: list[str]
     _type: str='users.Applicant'
