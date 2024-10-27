@@ -2,16 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>University Admission Application</title>
+    <title>Form</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    <!-- Font Awesome for icons (if needed) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="form.css">
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="../images/logo.png">
+    <link rel="icon" type="image/png" href="./images/logo.png">
 </head>
 <body>
     <!-- Application Form Section -->
@@ -30,11 +26,10 @@
             </div>
 
             <!-- Form Start -->
-            <form id="applicationForm">
+            <form id="applicationForm" action="http://127.0.0.1:3016/form-process" name="Formfill" method="post" enctype="multipart/form-data">
                 <!-- Step 1: Personal Information -->
                 <div class="form-step active">
                     <h3>Personal Information</h3>
-                    <!-- Form Fields -->
                     <div class="form-group">
                         <label for="firstName">First Name *</label>
                         <input type="text" id="firstName" name="firstName" required>

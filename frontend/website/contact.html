@@ -42,14 +42,14 @@
                 </div>
             </div>
             <div class="form-container">
-                <form class="styled-form" onsubmit="return validateForm()" method="POST" action="http://127.0.0.1:3019/email">
+                <form class="styled-form" onsubmit="return validateForm()" method="POST" action=""></form>
                     <h2>Send Message</h2>
                     <div class="inputBox">
-                        <input type="text" name="" required="required">
+                        <input type="text" name="name" required="required">
                         <span>Full Name</span>
                     </div>
                     <div class="inputBox">
-                        <input type="email" name="" required="required">
+                        <input type="email" name="email" required="required">
                         <span>Email</span>
                     </div>
                     <div class="inputBox">
@@ -57,12 +57,38 @@
                         <span>Type your Message...</span>
                     </div>
                     <div class="inputBox">
-                        <input type="submit" name="" value="Send">
+                        <input type="submit" name="message" value="Send">
                     </div>
                 </form>
                 </div>
             </div>
         </div>
     </section>
+    <script>
+        const form = document.querySelector('form');
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const formData = new FormData(form);
+            const obj = Object.fromEntries(formData.entries());
+            const json = JSON.stringify(obj);
+    
+            try {
+                const response = await fetch('http://127.0.0.1:3016/email', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: json,
+                });
+    
+                if (response.redirected) {
+                    window.location.href = response.url;
+                } else {
+                    const data = await response.json();
+                    console.log(data);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+    </script>
 </body>
 </html>

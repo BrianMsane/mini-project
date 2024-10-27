@@ -17,7 +17,7 @@ class Account:
 @dataclass
 class Demographic:
     first_name: str
-    middle_name: str=None
+    middle_name: str
     surname: str
     date_of_birth: str
     gender: Literal['Male', 'Female', 'Other']

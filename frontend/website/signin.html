@@ -19,7 +19,7 @@
 <body>
     <div class="container">
         <div class="wrapper">
-            <form id="form" action="http://127.0.0.1:3016/login-process" method="post" onsubmit="return validateForm()">
+            <form id="form" action="" method="post" onsubmit="return validateForm()">
                 <h1>Login</h1>
                 <div class="input-box">
                     <i class="fas fa-user"></i>
@@ -39,5 +39,32 @@
         </div>
     </div>
     <script src="signin.js"></script>
+    <script>
+        const form = document.querySelector('form');
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const formData = new FormData(form);
+            const obj = Object.fromEntries(formData.entries());
+            const json = JSON.stringify(obj);
+    
+            try {
+                const response = await fetch('http://127.0.0.1:3016/login-process', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: json,
+                });
+    
+                if (response.redirected) {
+                    window.location.href = response.url;
+                } else {
+                    const data = await response.json();
+                    console.log(data);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+    </script>
+    
 </body>
 </html>
