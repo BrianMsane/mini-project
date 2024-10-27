@@ -2,18 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Form</title>
+    <title>University Admission Application</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons (if needed) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="form.css">
-    <link rel="icon" type="image/jpeg" href="../images/logo.png">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../images/logo.png">
 </head>
 <body>
     <!-- Application Form Section -->
     <section class="application-form">
         <div class="container">
-            <h2>University Admission Application</h2>
+            <h2>Admission Form</h2>
             <!-- Progress Bar -->
             <div class="progress-bar">
                 <div class="step active" data-title="Personal Information"></div>
@@ -30,6 +34,7 @@
                 <!-- Step 1: Personal Information -->
                 <div class="form-step active">
                     <h3>Personal Information</h3>
+                    <!-- Form Fields -->
                     <div class="form-group">
                         <label for="firstName">First Name *</label>
                         <input type="text" id="firstName" name="firstName" required>
@@ -104,7 +109,7 @@
                         <textarea id="address" name="address" required></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="city">City/State *</label>
+                        <label for="city">City/Region *</label>
                         <input type="text" id="city" name="city" required>
                     </div>
                     <div class="form-group">
@@ -217,22 +222,27 @@
                 <!-- Step 6: Upload Documents -->
                 <div class="form-step">
                     <h3>Upload Documents</h3>
-                    <!-- <div class="form-group">
+                    <!-- If you don't need these fields, you can remove them -->
+                    <!--
+                    <div class="form-group">
                         <label for="passportPhoto">Passport Photo *</label>
                         <input type="file" id="passportPhoto" name="passportPhoto" accept="image/*" required>
-                    </div> -->
-                    <!-- <div class="form-group">
+                    </div>
+                    <div class="form-group">
                         <label for="idDocument">Identity Document *</label>
                         <input type="file" id="idDocument" name="idDocument" accept=".pdf,.jpg,.png" required>
-                    </div> -->
+                    </div>
+                    -->
                     <div class="form-group">
                         <label for="transcripts">Academic Transcripts *</label>
                         <input type="file" id="transcripts" name="transcripts" accept=".pdf,.jpg,.png" required>
                     </div>
-                    <!-- <div class="form-group">
+                    <!--
+                    <div class="form-group">
                         <label for="certificates">Certificates *</label>
                         <input type="file" id="certificates" name="certificates" accept=".pdf,.jpg,.png" required>
-                    </div> -->
+                    </div>
+                    -->
                     <div class="form-navigation">
                         <button type="button" class="prev-btn">Previous</button>
                         <button type="button" class="next-btn">Next</button>
@@ -303,7 +313,7 @@
                     const fieldType = input.type;
                     const fieldName = input.name;
 
-                    if ((fieldType === 'radio' || fieldType === 'checkbox') && !input.checked) {
+                    if ((fieldType === 'radio' || fieldType === 'checkbox')) {
                         const checked = step.querySelector(`input[name="${fieldName}"]:checked`);
                         if (!checked) {
                             isValid = false;
@@ -346,11 +356,11 @@
             return re.test(email);
         }
 
-        <!-- function validatePhone(phone) {
+        //function validatePhone(phone) {
             // Simple phone regex (digits only, 10-15 digits)
-            const re = /^[0-9]{10,15}$/;
-            return re.test(phone);
-        } -->
+        //    const re = /^[0-9]{10,15}$/;
+        //    return re.test(phone);
+        //}
 
         function validateDate(date) {
             // Check if date is valid
@@ -377,7 +387,6 @@
             e.preventDefault();
             const currentStep = document.querySelector('.form-step.active');
             if (validateStep(currentStep)) {
-                // Optionally, perform a final validation of all steps here
                 alert('Application Submitted Successfully!');
                 form.reset();
                 window.location.href = 'index.html';
