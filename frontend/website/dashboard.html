@@ -8,27 +8,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="sidebar">
+    <div class="container">
+        <h1>Welcome, <%= username %>!</h1>
+        <p>This is your dashboard.</p>
         <ul>
-            <li><a href="/modify-details"><i class="fas fa-user-edit"></i> Modify Details</a></li>
-            <li><a href="/admission-status"><i class="fas fa-info-circle"></i> Admission Status</a></li>
-            <li><a href="/resources"><i class="fas fa-book"></i> Resources</a></li>
-            <li><a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            <li><a href="/form">Fill Out Application Form</a></li>
+            <!-- Add more links as needed -->
+            <li><a href="/logout">Logout</a></li>
         </ul>
     </div>
-
-    <div class="main-content">
-        <div class="container">
-            <h1>Welcome, <%= username %>!</h1>
-            <p>This is your dashboard.</p>
-            <div class="links">
-                <a href="/form" class="btn">Fill Out Application Form</a>
-                <!-- Add more buttons or content as needed -->
-            </div>
-        </div>
-    </div>
-
-    <!-- Font Awesome for icons -->
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </body>
 </html>

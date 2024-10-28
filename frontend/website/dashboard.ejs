@@ -2,14 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Modify Details</title>
+    <title>User Dashboard</title>
     <link rel="stylesheet" href="dashboard.css">
-    <link rel="icon" type="image/png" href="./images/logo.png">
+    <link rel="icon" type="image/png" href="../images/logo.png">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
 <body>
     <div class="sidebar">
-        <!-- Same sidebar as in dashboard.ejs -->
         <ul>
             <li><a href="/modify-details"><i class="fas fa-user-edit"></i> Modify Details</a></li>
             <li><a href="/admission-status"><i class="fas fa-info-circle"></i> Admission Status</a></li>
@@ -20,20 +19,12 @@
 
     <div class="main-content">
         <div class="container">
-            <h1>Modify Your Details</h1>
-            <form action="/modify-details-process" method="POST">
-                <!-- Include form fields for user details -->
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" value="<%= user.email %>" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">New Password</label>
-                    <input type="password" id="password" name="password">
-                </div>
-                <!-- Add other fields as needed -->
-                <button type="submit" class="btn">Update Details</button>
-            </form>
+            <h1>Welcome, <%= username %>!</h1>
+            <p>This is your dashboard.</p>
+            <div class="links">
+                <a href="/form" class="btn">Fill Out Application Form</a>
+                <!-- Add more buttons or content as needed -->
+            </div>
         </div>
     </div>
 
