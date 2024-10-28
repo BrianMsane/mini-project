@@ -1,15 +1,16 @@
 '''Define the FASTAPI endpoints for this application
 '''
 
-
+import os
+import dotenv
+import json
 import datetime
 import logging
-from fastapi import APIRouter, UploadFile, File
+from fastapi import APIRouter, UploadFile, File, Request, HTTPException
 from db.mongo import read, create
 from utils.emails import EmailSupport
 from utils.request import EmailReq, AuthenticateReq, RegisterReq, FormReq
-import os
-import dotenv
+from users.users import EducationalBackground, Demographic, NextofKin, Applicant
 
 
 dotenv.load_dotenv()
@@ -27,26 +28,29 @@ async def root():
 async def authenticate(req: AuthenticateReq):
     '''Authenticatin
     '''
+    print(req)
     doc = read(query={'username': req.username})[0]
     if doc:
         if doc.get('password') == req.password:
-            return True
-    return False
+            return {"authenticated": True}
+    return {"authenticated": False}
 
 
 @router.post('/register', tags=['Authenicate'])
 async def register(req: RegisterReq):
     '''Register users on signup
     '''
+    if req.conf_password == req.password:
+        raise HTTPException(status_code=400, detail="Passwords do not match")
     doc = {
         'username': req.username,
         'email': req.email,
-        'password': req.password if req.conf_password == req.password else '',
+        'password': req.password,
         'date': datetime.date.today().strftime('%Y-%m-%d')
     }
     if create(doc=doc):
-        return True
-    return False
+        return {"registered": True}
+    return {"registered": False}
 
 
 @router.post('/contact-us', tags=['Email-Handling'])
@@ -63,22 +67,48 @@ async def email_support(req: EmailReq) -> bool:
         return False
 
 
-@router.post('/upload_document', tags=['Symbols'])
-async def upload(
-    file: UploadFile = File(description='File'),
-    upload_dir: str="uploaded"
-):
-    os.makedirs(upload_dir, exist_ok=True)
-    # ext = file.filename.split('.')[-1]
-    # file.filename = f'user_id_.{ext}'
+@router.post('/modify-details', tags=['User'])
+async def modify_details(req: Request):
+    '''Modify user details'''
+    data = await req.json()
+    username = data.get('username')
+    email = data.get('email')
+    password = data.get('password')
 
-    file_location = os.path.join(upload_dir, file.filename)
-    with open(file_location, "wb") as f:
-        await f.write(file.file.read())
+    # Implement logic to update user details in the database
+    success = update_user_details(username, email, password)
+
+    return {"success": success}
 
 
-@router.post('/form')
-async def form(req: FormReq):
-    '''Get the data in the form and store it
-    '''
-    pass
+
+@router.post('/form', tags=['Application'])
+async def form(req: Request):
+    '''Get the data in the form and store it'''
+    form = await req.form()
+    data = form.get('data')
+    applicant_data = json.loads(data)
+    upload_folder = 'uploads'
+    if not os.path.exists(upload_folder):
+        os.makedirs(upload_folder)
+
+    # Handle the uploaded files
+    file_locations = {}
+    for key in form.keys():
+        form_value = form[key]
+        if isinstance(form_value, UploadFile):
+            upload_file = form_value
+            file_location = os.path.join(upload_folder, upload_file.filename)
+            with open(file_location, "wb") as buffer:
+                buffer.write(await upload_file.read())
+            file_locations[key] = file_location
+
+    applicant = Applicant(
+        demographic=Demographic(**applicant_data['demographic']),
+        kin=NextofKin(**applicant_data['kin']),
+        education=EducationalBackground(**applicant_data['education']),
+        interests=applicant_data['interests'],
+        _type=applicant_data['_type']
+    )
+    if create(collection='applicants', doc=applicant):
+        return True

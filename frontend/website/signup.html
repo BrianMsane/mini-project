@@ -12,27 +12,53 @@
     <div class="container">
         <div class="form-box">
             <h2>Welcome to EduSphere!</h2>
-            <form action="http://127.0.0.1:3016/signup-process" name="Formfill" onsubmit="return validation()" method="post">
+            <form name="Formfill">
                 <div class="input-box">
                     <i class="fas fa-user"></i>
-                    <input type="text" name="Username" placeholder="Username" required>
+                    <input type="text" name="username" placeholder="Username" required>
                 </div>
                 <div class="input-box">
                     <i class="fas fa-envelope"></i>
-                    <input type="email" name="Email" placeholder="Email" required>
+                    <input type="email" name="email" placeholder="Email" required>
                 </div>
                 <div class="input-box">
                     <i class="fas fa-lock"></i>
-                    <input type="password" name="Password" placeholder="Password" required>
+                    <input type="password" name="password" placeholder="Password" required>
                 </div>
                 <div class="input-box">
                     <i class="fas fa-lock"></i>
-                    <input type="password" name="CPassword" placeholder="Confirm Password" required>
+                    <input type="password" name="conf_password" placeholder="Confirm Password" required>
                 </div>
                 <button type="submit" class="btn">Register</button>
             </form>
         </div>
     </div>
     <script src="signup.js"></script>
+    <script>
+        const form = document.querySelector('form');
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const formData = new FormData(form);
+            const obj = Object.fromEntries(formData.entries());
+            const json = JSON.stringify(obj);
+    
+            try {
+                const response = await fetch('http://127.0.0.1:3016/signup-process', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: json,
+                });
+    
+                if (response.redirected) {
+                    window.location.href = response.url;
+                } else {
+                    const data = await response.json();
+                    console.log(data);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+    </script>
 </body>
 </html>
