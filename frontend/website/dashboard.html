@@ -2,20 +2,39 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>User Dashboard</title>
+    <title>Responsive Dashboard with Sidebar Menu</title>
+    <!-- Link to the external CSS file -->
     <link rel="stylesheet" href="dashboard.css">
-    <link rel="icon" type="image/png" href="../images/logo.png">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Include Font Awesome for icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>Welcome, <%= username %>!</h1>
-        <p>This is your dashboard.</p>
+
+    <!-- Hover Area with Menu Icon -->
+    <div class="hover-area">
+        <i class="fas fa-bars"></i>
+    </div>
+
+    <!-- Sidebar Menu -->
+    <div class="sidebar">
+        <h2>Menu</h2>
         <ul>
-            <li><a href="/form">Fill Out Application Form</a></li>
-            <!-- Add more links as needed -->
-            <li><a href="/logout">Logout</a></li>
+            <li><a href="#application-status"><i class="fas fa-info-circle"></i> Application Status</a></li>
+            <li><a href="#edit-information"><i class="fas fa-user-edit"></i> Edit Information</a></li>
+            <li><a href="#new-application"><i class="fas fa-file-alt"></i> New Application</a></li>
+            <li><a href="#modify-application"><i class="fas fa-edit"></i> Modify Application</a></li>
+            <li><a href="#logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
         </ul>
     </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h1>Hello, [User's Name]!</h1>
+        <p>
+            Welcome to your dashboard. Here you can check your application status, edit your information, and manage your applications.
+        </p>
+        <!-- Additional content can be added here -->
+    </div>
+
 </body>
 </html>
