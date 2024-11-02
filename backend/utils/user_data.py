@@ -3,7 +3,7 @@
 
 
 import typing
-from users.users import Applicant
+from backend.utils.users import Applicant
 from .extract import SymbolsExtraction
 
 

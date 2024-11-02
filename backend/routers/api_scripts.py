@@ -10,7 +10,7 @@ from fastapi import APIRouter, UploadFile, File, Request, HTTPException
 from db.mongo import read, create
 from utils.emails import EmailSupport
 from utils.request import EmailReq, AuthenticateReq, RegisterReq, FormReq
-from users.users import EducationalBackground, Demographic, NextofKin, Applicant
+from backend.utils.users import EducationalBackground, Demographic, NextofKin, Applicant
 
 
 dotenv.load_dotenv()
@@ -40,7 +40,7 @@ async def authenticate(req: AuthenticateReq):
 async def register(req: RegisterReq):
     '''Register users on signup
     '''
-    if req.conf_password == req.password:
+    if req.conf_password != req.password:
         raise HTTPException(status_code=400, detail="Passwords do not match")
     doc = {
         'username': req.username,
