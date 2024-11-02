@@ -21,11 +21,9 @@ class Assistant(ConversableAgent):
 
     def __init__(
         self,
-        user: User,
         system_message: str,
         model: str
     ) -> None:
-        self.user = user
         self.system_message = system_message
         self.model = model
 
@@ -71,7 +69,7 @@ class EmailAssistant(Assistant):
         model: str
     ) -> None:
         super.__init__(system_messge=system_messge, model=model)
-        
+
         async def send_email(response: str):
             email = EmailSupport(sender_email='msanebrianboss@gmail.com', message=response, name='Kuhle')
             return await email.send_email()
@@ -89,9 +87,11 @@ class Recommender(Assistant):
 
     def __init__(
         self,
+        user: User,
         system_messge: str=model_config['recommender']['system_message'],
         model: str=model_config['recommender']['system_message'],
     ) -> None:
+        self.user = user
         super.__init__(system_messge=system_messge, model=model)
 
         async def recommend_programs():

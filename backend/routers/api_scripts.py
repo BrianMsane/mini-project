@@ -10,7 +10,8 @@ from fastapi import APIRouter, UploadFile, File, Request, HTTPException
 from db.mongo import read, create
 from utils.emails import EmailSupport
 from utils.request import EmailReq, AuthenticateReq, RegisterReq, FormReq, ConvoRequest
-from backend.utils.users import EducationalBackground, Demographic, NextofKin, Applicant
+from utils.users import EducationalBackground, Demographic, NextofKin, Applicant
+from ai.conversation import Conversation
 
 
 dotenv.load_dotenv()
@@ -51,16 +52,22 @@ async def register(req: RegisterReq):
         return {"registered": True}
     return {"registered": False}
 
+@router.post('convo_init')
+def initialize_converstion(req: ConvoInit):
+    '''
+    '''
 
-app.post('/chat')
+
+@router.post('/chat/convo_id')
 async def convo(req: ConvoRequest):
     ''' Conversation API
     '''
-    req.query
-    return {'message': ''}
+    convo = Conversation()
+    response = convo.respond(req.query)
+    return {'message': response}
 
 
-@router.post('/contact-us', tags=['Email-Handling'])
+@router.post('/contact', tags=['Email-Handling'])
 async def email_support(req: EmailReq) -> bool:
     '''API Endpoint for handling contact-us page and visitors queries [powered by AI]
     '''
