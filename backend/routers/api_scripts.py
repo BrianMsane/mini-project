@@ -9,8 +9,9 @@ import logging
 from fastapi import APIRouter, UploadFile, File, Request, HTTPException
 from db.mongo import read, create
 from utils.emails import EmailSupport
-from utils.request import EmailReq, AuthenticateReq, RegisterReq, FormReq
-from users.users import EducationalBackground, Demographic, NextofKin, Applicant
+from utils.request import EmailReq, AuthenticateReq, RegisterReq, FormReq, ConvoRequest
+from utils.users import EducationalBackground, Demographic, NextofKin, Applicant
+from ai.conversation import Conversation
 
 
 dotenv.load_dotenv()
@@ -26,9 +27,8 @@ async def root():
 
 @router.post('/authenticate', tags=['Authenicate'])
 async def authenticate(req: AuthenticateReq):
-    '''Authenticatin
+    ''' Authenticatin
     '''
-    print(req)
     doc = read(query={'username': req.username})[0]
     if doc:
         if doc.get('password') == req.password:
@@ -40,7 +40,7 @@ async def authenticate(req: AuthenticateReq):
 async def register(req: RegisterReq):
     '''Register users on signup
     '''
-    if req.conf_password == req.password:
+    if req.conf_password != req.password:
         raise HTTPException(status_code=400, detail="Passwords do not match")
     doc = {
         'username': req.username,
@@ -52,8 +52,22 @@ async def register(req: RegisterReq):
         return {"registered": True}
     return {"registered": False}
 
+@router.post('convo_init')
+def initialize_converstion(req: ConvoInit):
+    '''
+    '''
 
-@router.post('/contact-us', tags=['Email-Handling'])
+
+@router.post('/chat/convo_id')
+async def convo(req: ConvoRequest):
+    ''' Conversation API
+    '''
+    convo = Conversation()
+    response = convo.respond(req.query)
+    return {'message': response}
+
+
+@router.post('/contact', tags=['Email-Handling'])
 async def email_support(req: EmailReq) -> bool:
     '''API Endpoint for handling contact-us page and visitors queries [powered by AI]
     '''
