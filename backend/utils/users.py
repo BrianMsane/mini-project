@@ -55,6 +55,7 @@ class EducationalBackground:
     qualifications: str
     grades: str
     stream: str
+    points: int
 
 
 @dataclass

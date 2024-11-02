@@ -1,7 +1,7 @@
 '''Endpoints request bodies
 '''
 
-
+from typing import Optional
 from pydantic import BaseModel
 
 
@@ -24,6 +24,11 @@ class RegisterReq(BaseModel):
     email: str
     password: str
     conf_password: str
+
+class ConvoRequest(BaseModel):
+    '''Conversation type'''
+    query: str
+    language: Optional[str]=None
 
 
 class FormReq(BaseModel):

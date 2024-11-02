@@ -27,7 +27,7 @@ class EmailSupport:
         self.sender_email = sender_email
         self.message = message
         self.name = name
-        
+
         self.date = datetime.date.today().strftime('%Y-%m-%d')
         self.sender_password = os.getenv('EMAIL_PASSWORD')
         self.admin_email = os.getenv('EMAIL')
@@ -58,15 +58,8 @@ class EmailSupport:
             return False
 
 
-    def ai_response(self) -> bool:
-        '''If query is easy, let an AI Agent handle the job on behalf of admin
-        '''
-        pass
-
-
-
-# Example usage
-if __name__ == '__main__':
-    email_support = EmailSupport(sender_email='msanebrianboss@gmail.com', message='Testing', name='Kuhle')
-    if email_support.send_email():
-        print('!!!!!!!!!!!!!!!!!!!!')
+# # Example usage
+# if __name__ == '__main__':
+#     email_support = EmailSupport(sender_email='msanebrianboss@gmail.com', message='Testing', name='Kuhle')
+#     if email_support.send_email():
+#         print('!!!!!!!!!!!!!!!!!!!!')

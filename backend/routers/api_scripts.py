@@ -9,7 +9,7 @@ import logging
 from fastapi import APIRouter, UploadFile, File, Request, HTTPException
 from db.mongo import read, create
 from utils.emails import EmailSupport
-from utils.request import EmailReq, AuthenticateReq, RegisterReq, FormReq
+from utils.request import EmailReq, AuthenticateReq, RegisterReq, FormReq, ConvoRequest
 from backend.utils.users import EducationalBackground, Demographic, NextofKin, Applicant
 
 
@@ -26,9 +26,8 @@ async def root():
 
 @router.post('/authenticate', tags=['Authenicate'])
 async def authenticate(req: AuthenticateReq):
-    '''Authenticatin
+    ''' Authenticatin
     '''
-    print(req)
     doc = read(query={'username': req.username})[0]
     if doc:
         if doc.get('password') == req.password:
@@ -51,6 +50,14 @@ async def register(req: RegisterReq):
     if create(doc=doc):
         return {"registered": True}
     return {"registered": False}
+
+
+app.post('/chat')
+async def convo(req: ConvoRequest):
+    ''' Conversation API
+    '''
+    req.query
+    return {'message': ''}
 
 
 @router.post('/contact-us', tags=['Email-Handling'])
