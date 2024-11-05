@@ -15,7 +15,7 @@ function FAQSection() {
       question: "What if I want to apply outside Eswatini?",
       answer: "This feature will soon be available.",
     },
-    // Add more FAQs as needed
+    // Add more FAQs
   ];
 
   const toggleFAQ = (index) => {

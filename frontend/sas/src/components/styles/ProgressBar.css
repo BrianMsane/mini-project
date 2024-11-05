@@ -1,0 +1,68 @@
+/* src/components/ProgressBar.css */
+
+/* Progress Bar */
+.progress-bar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.progress-bar::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 30px;
+  right: 30px;
+  height: 4px;
+  background-color: #e0e0e0;
+  transform: translateY(-50%);
+  z-index: 0;
+}
+
+.progress-bar .step {
+  position: relative;
+  z-index: 1;
+  width: 30px;
+  height: 30px;
+  background-color: #e0e0e0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+.progress-bar .step.active {
+  background-color: #009688;
+}
+
+.progress-bar .step::after {
+  content: attr(data-title);
+  position: absolute;
+  top: 40px;
+  width: 100px;
+  text-align: center;
+  font-size: 12px;
+  color: #666;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .progress-bar::before {
+    left: 20px;
+    right: 20px;
+  }
+
+  .progress-bar .step::after {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .progress-bar {
+    display: none;
+  }
+}
