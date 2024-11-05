@@ -1,9 +1,9 @@
-// TestimonialsCarousel.js
 import React from "react";
-import "./TestimonialsCarousel.css"; // Import your CSS
+import "./TestimonialsCarousel.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
+import "swiper/swiper-bundle.css";
 
 import SwiperCore, { Autoplay, Pagination } from "swiper";
 
