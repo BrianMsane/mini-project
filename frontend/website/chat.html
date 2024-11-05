@@ -1,167 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Interactive Chat</title>
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-        <style>
-            /* Global Styles */
-            * {
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-                font-family: 'Poppins', sans-serif;
-            }
-            
-            body {
-                background-color: #f9f9f9;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 100vh;
-            }
+  <head>
+    <meta charset="UTF-8" />
+    <title>Interactive Chat</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Global Styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
 
-            /* Chat Container */
-            #chat-container {
-                width: 100%;
-                max-width: 500px;
-                height: 500px;
-                border-radius: 10px;
-                background-color: #fff;
-                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-                padding: 15px;
-                overflow-y: auto;
-                margin-bottom: 80px;
-            }
+      body {
+        background-color: #f9f9f9;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
 
-            /* Message Styling */
-            .message {
-                padding: 10px;
-                margin: 5px 0;
-                border-radius: 8px;
-                max-width: 75%;
-                line-height: 1.5;
-                font-size: 16px;
-                color: #333;
-            }
-            
-            .user-message {
-                background-color: #d1f7d6;
-                color: #333;
-                align-self: flex-end;
-                text-align: right;
-                margin-left: auto;
-            }
-            
-            .bot-message {
-                background-color: #f2f2f2;
-                color: #333;
-                align-self: flex-start;
-            }
+      /* Chat Container */
+      #chat-container {
+        width: 100%;
+        max-width: 500px;
+        height: 500px;
+        border-radius: 10px;
+        background-color: #fff;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        padding: 15px;
+        overflow-y: auto;
+        margin-bottom: 80px;
+      }
 
-            /* Input Area */
-            #input-area {
-                position: fixed;
-                bottom: 10px;
-                width: 100%;
-                max-width: 500px;
-                display: flex;
-                justify-content: space-between;
-                padding: 10px;
-                background-color: #abe8c7;
-                border-radius: 10px;
-                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-            }
-            
-            #input-text {
-                flex: 1;
-                padding: 10px;
-                border: none;
-                border-radius: 5px;
-                resize: none;
-                font-size: 16px;
-                font-family: 'Poppins', sans-serif;
-                background-color: #fff;
-                color: #333;
-            }
-            
-            #input-text:focus {
-                outline: none;
-                box-shadow: 0px 0px 5px rgba(0, 153, 136, 0.5);
-            }
+      /* Message Styling */
+      .message {
+        padding: 10px;
+        margin: 5px 0;
+        border-radius: 8px;
+        max-width: 75%;
+        line-height: 1.5;
+        font-size: 16px;
+        color: #333;
+      }
 
-            /* Send Button */
-            #send-button {
-                background-color: #00796b;
-                border: none;
-                border-radius: 5px;
-                padding: 10px 15px;
-                margin-left: 10px;
-                font-size: 16px;
-                color: #fff;
-                cursor: pointer;
-                transition: background-color 0.3s;
-                font-weight: 600;
-            }
+      .user-message {
+        background-color: #d1f7d6;
+        color: #333;
+        align-self: flex-end;
+        text-align: right;
+        margin-left: auto;
+      }
 
-            #send-button:hover {
-                background-color: #009688;
-            }
+      .bot-message {
+        background-color: #f2f2f2;
+        color: #333;
+        align-self: flex-start;
+      }
 
-            /* Scrollbar Customization */
-            #chat-container::-webkit-scrollbar {
-                width: 6px;
-            }
+      /* Input Area */
+      #input-area {
+        position: fixed;
+        bottom: 10px;
+        width: 100%;
+        max-width: 500px;
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        background-color: #abe8c7;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      }
 
-            #chat-container::-webkit-scrollbar-thumb {
-                background-color: #009688;
-                border-radius: 10px;
-            }
-        </style>
-    </head>
-    <body>
-        <div id="chat-container"></div>
-        <div id="input-area">
-            <textarea id="input-text" rows="1" placeholder="Type your message..."></textarea>
-            <button id="send-button">Send</button>
-        </div>
+      #input-text {
+        flex: 1;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        resize: none;
+        font-size: 16px;
+        font-family: "Poppins", sans-serif;
+        background-color: #fff;
+        color: #333;
+      }
 
-        <script>
-            document.getElementById('send-button').addEventListener('click', sendMessage);
+      #input-text:focus {
+        outline: none;
+        box-shadow: 0px 0px 5px rgba(0, 153, 136, 0.5);
+      }
 
-            function sendMessage() {
-                const inputText = document.getElementById('input-text');
-                const message = inputText.value.trim();
-                if (message === '') return;
+      /* Send Button */
+      #send-button {
+        background-color: #00796b;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 15px;
+        margin-left: 10px;
+        font-size: 16px;
+        color: #fff;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        font-weight: 600;
+      }
 
-                // Display user's message
-                addMessageToChat(message, 'user-message');
+      #send-button:hover {
+        background-color: #009688;
+      }
 
-                // Clear the input
-                inputText.value = '';
+      /* Scrollbar Customization */
+      #chat-container::-webkit-scrollbar {
+        width: 6px;
+      }
 
-                // Send the message to the backend
-                fetch('/chat', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ query: message })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    // Display the response from the backend
-                    addMessageToChat(data.response, 'bot-message');
-                })
-                .catch(error => console.error('Error:', error));
-            }
+      #chat-container::-webkit-scrollbar-thumb {
+        background-color: #009688;
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="chat-container"></div>
+    <div id="input-area">
+      <textarea
+        id="input-text"
+        rows="1"
+        placeholder="Type your message..."
+      ></textarea>
+      <button id="send-button">Send</button>
+    </div>
 
-            function addMessageToChat(message, className) {
-                const chatContainer = document.getElementById('chat-container');
-                const messageElement = document.createElement('div');
-                messageElement.className = `message ${className}`;
-                messageElement.textContent = message;
-                chatContainer.appendChild(messageElement);
-                chatContainer.scrollTop = chatContainer.scrollHeight;
-            }
-        </script>
-    </body>
+    <script>
+      document
+        .getElementById("send-button")
+        .addEventListener("click", sendMessage);
+
+      function sendMessage() {
+        const inputText = document.getElementById("input-text");
+        const message = inputText.value.trim();
+        if (message === "") return;
+
+        // Display user's message
+        addMessageToChat(message, "user-message");
+
+        // Clear the input
+        inputText.value = "";
+
+        // Send the message to the backend
+        fetch("/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ query: message }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            // Display the response from the backend
+            addMessageToChat(data.response, "bot-message");
+          })
+          .catch((error) => console.error("Error:", error));
+      }
+
+      function addMessageToChat(message, className) {
+        const chatContainer = document.getElementById("chat-container");
+        const messageElement = document.createElement("div");
+        messageElement.className = `message ${className}`;
+        messageElement.textContent = message;
+        chatContainer.appendChild(messageElement);
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+      }
+    </script>
+  </body>
 </html>
