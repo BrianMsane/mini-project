@@ -1,6 +1,6 @@
 // FAQSection.js
 import React, { useState } from "react";
-import "../styles/home/FAQSection.css"; // Import your CSS
+import "./FAQSection.css"; // Import your CSS
 
 function FAQSection() {
   const [activeIndex, setActiveIndex] = useState(null);

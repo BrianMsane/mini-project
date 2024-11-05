@@ -1,6 +1,6 @@
 // FeaturesSection.js
 import React from "react";
-import "../styles/home/FeaturesSection.css"; // Import your CSS
+import "./FeaturesSection.css"; // Import your CSS
 
 function FeaturesSection() {
   const features = [

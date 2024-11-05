@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet";
-import "./styles/signup.css";
+import "./signup.css";
 
 function SignUp() {
   const [formData, setFormData] = useState({
