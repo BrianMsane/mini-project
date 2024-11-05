@@ -1,0 +1,77 @@
+/* FAQSection.css */
+
+/* FAQ Section */
+.faq {
+  padding: 80px 0;
+}
+
+.faq h2 {
+  font-size: 36px;
+  margin-bottom: 50px;
+  color: #333;
+  text-align: center;
+}
+
+.faq-items {
+  max-width: 800px;
+  margin: auto;
+}
+
+.faq-item {
+  margin-bottom: 15px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.faq-question {
+  padding: 15px;
+  background-color: #f9f9f9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.faq-question h3 {
+  font-size: 20px;
+  color: #009688;
+  margin: 0;
+}
+
+.faq-question i {
+  font-size: 18px;
+  color: #009688;
+  transition: transform 0.3s ease;
+}
+
+.faq-item.active .faq-question i {
+  transform: rotate(180deg);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  background-color: #fff;
+  padding: 0 15px;
+  transition: max-height 0.3s ease;
+}
+
+.faq-item.active .faq-answer {
+  max-height: 200px;
+  padding: 15px;
+}
+
+.faq-answer p {
+  font-size: 16px;
+  color: #666;
+}
+
+/* Responsive Styles */
+@media (max-width: 480px) {
+  .faq h2 {
+    font-size: 28px;
+  }
+
+  .faq-question h3 {
+    font-size: 20px;
+  }
+}
