@@ -2,113 +2,113 @@
 
 /* Reset styles */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 /* Body styles */
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #fff;
-    color: #333;
-    overflow-x: hidden;
+  font-family: "Arial", sans-serif;
+  background-color: #fff;
+  color: #333;
+  overflow-x: hidden;
 }
 
 /* Main content area */
 .main-content {
-    padding: 50px;
-    transition: margin-right 0.3s ease-in-out;
+  padding: 50px;
+  transition: margin-right 0.3s ease-in-out;
 }
 
 /* Sidebar styles */
 .sidebar {
-    position: fixed;
-    top: 0;
-    right: -250px; /* Hidden off-screen */
-    width: 250px;
-    height: 100%;
-    background-color: #27ae60; /* Green color */
-    color: #fff;
-    padding: 20px;
-    transition: right 0.3s ease-in-out;
-    z-index: 999;
+  position: fixed;
+  top: 0;
+  right: -250px; /* Hidden off-screen */
+  width: 250px;
+  height: 100%;
+  background-color: #27ae60; /* Green color */
+  color: #fff;
+  padding: 20px;
+  transition: right 0.3s ease-in-out;
+  z-index: 999;
 }
 
 /* Hover area to trigger the sidebar */
 .hover-area {
-    position: fixed;
-    top: 50%;
-    right: 0;
-    width: 50px;
-    height: 50px;
-    background-color: #27ae60;
-    color: #fff;
-    border-radius: 25px 0 0 25px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 1000;
-    transform: translateY(-50%);
+  position: fixed;
+  top: 50%;
+  right: 0;
+  width: 50px;
+  height: 50px;
+  background-color: #27ae60;
+  color: #fff;
+  border-radius: 25px 0 0 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 1000;
+  transform: translateY(-50%);
 }
 
 /* Sidebar visible on hover */
 .hover-area:hover + .sidebar,
 .sidebar:hover {
-    right: 0;
+  right: 0;
 }
 
 /* Adjust main content when sidebar is visible */
 .hover-area:hover ~ .main-content,
 .sidebar:hover ~ .main-content {
-    margin-right: 250px;
+  margin-right: 250px;
 }
 
 /* Sidebar content */
 .sidebar h2 {
-    margin-bottom: 30px;
-    text-align: center;
+  margin-bottom: 30px;
+  text-align: center;
 }
 
 .sidebar ul {
-    list-style: none;
+  list-style: none;
 }
 
 .sidebar li {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .sidebar a {
-    text-decoration: none;
-    color: #fff;
-    font-size: 18px;
-    transition: color 0.2s;
-    display: flex;
-    align-items: center;
+  text-decoration: none;
+  color: #fff;
+  font-size: 18px;
+  transition: color 0.2s;
+  display: flex;
+  align-items: center;
 }
 
 .sidebar a:hover {
-    color: #d1e231; /* Light green on hover */
+  color: #d1e231; /* Light green on hover */
 }
 
 .sidebar a i {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 
 /* Hover area icon */
 .hover-area i {
-    font-size: 24px;
+  font-size: 24px;
 }
 
 /* Responsive design */
 @media (max-width: 768px) {
-    .sidebar {
-        width: 200px;
-    }
+  .sidebar {
+    width: 200px;
+  }
 
-    .hover-area:hover ~ .main-content,
-    .sidebar:hover ~ .main-content {
-        margin-right: 200px;
-    }
+  .hover-area:hover ~ .main-content,
+  .sidebar:hover ~ .main-content {
+    margin-right: 200px;
+  }
 }

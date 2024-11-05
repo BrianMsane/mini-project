@@ -1,4 +1,3 @@
-
 // // Serving the front-end appliation
 // const express = require('express');
 // const mongoose = require('mongoose');
@@ -8,15 +7,12 @@
 // const upload = multer({ dest: 'temp/' });
 // const fs = require('fs');
 
-
 // // application
 // const app = express();
 // const PORT = 3019;
 // app.listen(PORT, ()=>{console.log('Server started successfully!');});
 // app.use(express.static(__dirname));
 // app.use(express.urlencoded({extended:true}));
-
-
 
 // // connecting to our database
 // mongoose.connect('mongodb://localhost:27017/SAS');
@@ -35,14 +31,12 @@
 // });
 // const SignUp = mongoose.model('data', singupSchema);
 
-
 // // define login schema
 // loginSchema = new mongoose.Schema({
 //     username: String,
 //     password: String,
 // });
 // const loginIn = mongoose.model('datas', singupSchema);
-
 
 // // define contact-us schema
 // contactUsSchema = new mongoose.Schema({
@@ -52,13 +46,10 @@
 // });
 // const contactUs= mongoose.model('datad', contactUsSchema);
 
-
-
 // // serving the application
 // app.get("/", (req, res) =>{
 //     res.sendFile(path.join(__dirname, './signup/index.html'));
 // });
-
 
 // // store data in db
 // app.post('/signup', async(req, res)=>{
@@ -73,7 +64,6 @@
 //     res.redirect(`/login?username=${username}&password=${password}`)
 // });
 
-
 // // store data in db
 // app.post('/login', async(req, res)=>{
 //     const {username, password} = req.body;
@@ -85,12 +75,10 @@
 //     res.sendFile(path.join(__dirname, './home/index.html'));
 // });
 
-
 // // serving the about-us
 // app.get("/about-us", (req, res) =>{
 //     res.sendFile(path.join(__dirname, './about-us/index.html'));
 // });
-
 
 // app.post("/contact-us", async (req, res) => {
 //     // Extract data from the frontend request and make backend payload
@@ -114,12 +102,10 @@
 //     }
 // });
 
-
 // // serving the error404 page
 // app.get("/error404", (req, res) =>{
 //     res.sendFile(path.join(__dirname, './error/index.html'));
 // });
-
 
 // // Handle file uploads and forward to FastAPI backend
 // app.post('/upload', upload.single('document'), async (req, res) => {

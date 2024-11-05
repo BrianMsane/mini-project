@@ -1,135 +1,135 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap");
 
 /* Reset and Fonts */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    background: linear-gradient(135deg, #fff, #89a4a1);
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Poppins', sans-serif;
-    color: #333;
+  background: linear-gradient(135deg, #fff, #89a4a1);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Poppins", sans-serif;
+  color: #333;
 }
 
 /* Container */
 .container {
-    width: 100%;
-    max-width: 400px;
-    padding: 20px;
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
 }
 
 /* Form Box */
 .form-box {
-    background: #fff;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
-    animation: fadeIn 1s ease-in-out;
+  background: #fff;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 1s ease-in-out;
 }
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .form-box h2 {
-    text-align: center;
-    margin-bottom: 30px;
-    color: #009688;
-    font-weight: 700;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #009688;
+  font-weight: 700;
 }
 
 /* Form Styles */
 .form-box form {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .input-box {
-    position: relative;
-    margin-bottom: 20px;
+  position: relative;
+  margin-bottom: 20px;
 }
 
 .input-box i {
-    position: absolute;
-    top: 50%;
-    left: 15px;
-    transform: translateY(-50%);
-    color: #009688;
-    font-size: 18px;
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+  color: #009688;
+  font-size: 18px;
 }
 
 .input-box input {
-    width: 100%;
-    padding: 12px 15px 12px 45px;
-    background: #f1f1f1;
-    border: 2px solid transparent;
-    border-radius: 30px;
-    font-size: 16px;
-    color: #333;
-    outline: none;
-    transition: background 0.3s, box-shadow 0.3s, border 0.3s;
+  width: 100%;
+  padding: 12px 15px 12px 45px;
+  background: #f1f1f1;
+  border: 2px solid transparent;
+  border-radius: 30px;
+  font-size: 16px;
+  color: #333;
+  outline: none;
+  transition: background 0.3s, box-shadow 0.3s, border 0.3s;
 }
 
 .input-box input:focus {
-    background: #fff;
-    border: 2px solid #009688;
-    box-shadow: 0 0 5px rgba(0, 150, 136, 0.2);
+  background: #fff;
+  border: 2px solid #009688;
+  box-shadow: 0 0 5px rgba(0, 150, 136, 0.2);
 }
 
 .input-box input::placeholder {
-    color: #aaa;
+  color: #aaa;
 }
 
 .btn {
-    width: 100%;
-    padding: 12px;
-    background: #009688;
-    border: none;
-    border-radius: 30px;
-    color: #fff;
-    font-size: 18px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.3s;
-    margin-top: 10px;
+  width: 100%;
+  padding: 12px;
+  background: #009688;
+  border: none;
+  border-radius: 30px;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-top: 10px;
 }
 
 .btn:hover {
-    background: #899795;
+  background: #899795;
 }
 
 .login-link {
-    text-align: center;
-    margin-top: 20px;
-    font-size: 14px;
-    color: #333;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #333;
 }
 
 .login-link a {
-    color: #009688;
-    text-decoration: none;
-    font-weight: 500;
+  color: #009688;
+  text-decoration: none;
+  font-weight: 500;
 }
 
 .login-link a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 @media (max-width: 480px) {
-    .form-box {
-        padding: 30px 20px;
-    }
+  .form-box {
+    padding: 30px 20px;
+  }
 }
