@@ -1,6 +1,6 @@
 // Navbar.js
 import React, { useState } from "react";
-import "./styles/home/Navbar.css"; // Import your CSS
+import "../styles/home/Navbar.css"; // Import your CSS
 
 function Navbar() {
   const [isActive, setIsActive] = useState(false);

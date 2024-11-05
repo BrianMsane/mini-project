@@ -1,6 +1,6 @@
 // ProcessSection.js
 import React from "react";
-import "./styles/home/ProcessSection.css"; // Import your CSS
+import "../styles/home/ProcessSection.css"; // Import your CSS
 
 function ProcessSection() {
   const steps = [

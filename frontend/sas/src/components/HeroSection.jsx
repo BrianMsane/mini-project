@@ -1,6 +1,6 @@
 // HeroSection.js
 import React from "react";
-import "./styles/home/HeroSection.css"; // Import your CSS
+import "../styles/home/HeroSection.css"; // Import your CSS
 
 function HeroSection() {
   return (

@@ -241,13 +241,10 @@ function AdmissionForm() {
     <section className="application-form">
       <div className="container">
         <h2>Admission Form</h2>
-        {/* Progress Bar */}
         <ProgressBar steps={steps} currentStep={currentStep} />
-        {/* Form Start */}
         <form id="applicationForm" onSubmit={handleSubmit}>
           {renderStep()}
         </form>
-        {/* Form End */}
       </div>
     </section>
   );
